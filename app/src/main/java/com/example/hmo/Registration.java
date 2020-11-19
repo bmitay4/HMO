@@ -29,7 +29,7 @@ public class Registration extends AppCompatActivity {
         userLN = findViewById(R.id.userLastName);
         userEmail = findViewById(R.id.userEmail);
         userPass = findViewById(R.id.userPassword);
-        Button registerButton = findViewById(R.id.createAccountButton);
+        Button registerButton = findViewById(R.id.createAccountButton_1);
 
         registerButton.setOnClickListener(v -> tryRegister());
     }

@@ -30,9 +30,13 @@ public class MainActivity extends AppCompatActivity {
 
         Button registerButton = findViewById(R.id.registerButton);
         Button loginButton = findViewById(R.id.loginButton);
+        Button teamButton = findViewById(R.id.Button_TeamLogin);
+        teamButton.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), Management.class)));
         userID = findViewById(R.id.textBoxID);
         userPassword = findViewById(R.id.textBoxPass);
+        Button forgotPass = findViewById(R.id.forgetPassButton);
 
+//        forgotPass.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), RegistrationDoctors.class)));
         registerButton.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), Registration.class)));
         loginButton.setOnClickListener(v -> tryLogin());
     }

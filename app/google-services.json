@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "611892441083",
-    "firebase_url": "https://healthcare-3119a.firebaseio.com",
-    "project_id": "healthcare-3119a",
-    "storage_bucket": "healthcare-3119a.appspot.com"
+    "project_number": "975474469427",
+    "firebase_url": "https://healthcare-5e530.firebaseio.com",
+    "project_id": "healthcare-5e530",
+    "storage_bucket": "healthcare-5e530.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:611892441083:android:2d7837ac2746b76531a55e",
+        "mobilesdk_app_id": "1:975474469427:android:d186a775b3670bcad81146",
         "android_client_info": {
           "package_name": "com.example.healthcare"
         }
       },
       "oauth_client": [
         {
-          "client_id": "611892441083-70kdp4pj1gajfh72v9ao44p49jj3f6n8.apps.googleusercontent.com",
+          "client_id": "975474469427-gppdomokcmvgor2lhom2o3evvq55sq7t.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD0LeYiMGs1Yc4mEQLc2pJbHDdWwCyMuzI"
+          "current_key": "AIzaSyB-3frovnnLYnPj4gXIecRWSVNjvfaCHjo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "611892441083-70kdp4pj1gajfh72v9ao44p49jj3f6n8.apps.googleusercontent.com",
+              "client_id": "975474469427-gppdomokcmvgor2lhom2o3evvq55sq7t.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -37,27 +37,27 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:611892441083:android:9d27c3f318285d8231a55e",
+        "mobilesdk_app_id": "1:975474469427:android:e6e73fe9a510c4e2d81146",
         "android_client_info": {
           "package_name": "com.example.hmo"
         }
       },
       "oauth_client": [
         {
-          "client_id": "611892441083-70kdp4pj1gajfh72v9ao44p49jj3f6n8.apps.googleusercontent.com",
+          "client_id": "975474469427-gppdomokcmvgor2lhom2o3evvq55sq7t.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD0LeYiMGs1Yc4mEQLc2pJbHDdWwCyMuzI"
+          "current_key": "AIzaSyB-3frovnnLYnPj4gXIecRWSVNjvfaCHjo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "611892441083-70kdp4pj1gajfh72v9ao44p49jj3f6n8.apps.googleusercontent.com",
+              "client_id": "975474469427-gppdomokcmvgor2lhom2o3evvq55sq7t.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
