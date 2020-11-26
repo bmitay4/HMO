@@ -30,7 +30,7 @@ public class BookAppointment extends AppCompatActivity {
     private ListView doclist, aptlist;
     private CalendarView cal;
     private ArrayAdapter arrdoc, times;
-    private ArrayList<NewDoctor> listingdocs;
+    private ArrayList<String> listingdocs;
     private String date, docid;
 
     @Override
@@ -48,9 +48,14 @@ public class BookAppointment extends AppCompatActivity {
         refdb.child("Doctors").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                listingdocs = new ArrayList<NewDoctor>();
+                listingdocs = new ArrayList<String>();
                 for (DataSnapshot doc : snapshot.getChildren()) {
-                    listingdocs.add(doc.getValue(NewDoctor.class));
+                    NewDoctor d = doc.getValue(NewDoctor.class);
+                    listingdocs.add(d.getUserFirstName()+" "+d.getUserLastName());
+                }
+                String[] a = new String[listingdocs.size()];
+                for (int i = 0; i < a.length; i++) {
+                    a[i] = listingdocs.get(i);
                 }
                 arrdoc = new ArrayAdapter(BookAppointment.this, android.R.layout.simple_list_item_1, listingdocs);
                 doclist.setAdapter(arrdoc);

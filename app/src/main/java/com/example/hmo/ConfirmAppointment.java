@@ -36,20 +36,19 @@ public class ConfirmAppointment extends AppCompatActivity {
         apt.setAvilable(false);
         apt.setUserID(user.getUserID());
         apt.setUserName(user.getUserFirstName());
-        apt.setDocLastName(user.getUserLastName());
+        apt.setUserLastName(user.getUserLastName());
 
         // Set avilable to falls
         String date = apt.getDate().replace(".","");
         String time = apt.getTime();
         String docid = apt.getDocID();
         refdb.child("Appointments").child(docid).child(date).child(time).setValue(apt).addOnFailureListener(v -> FaildSetValue(v));
-
         // Book in user appointment
         String userid = user.getUserID();
         refdb.child("UserAppointments").child(userid).child(date).child(time).setValue(apt).addOnFailureListener(v -> FaildSetValue(v));;
 
         // Book in doc appointment
-        refdb.child("DoctorAppointment").child(docid).child(date).child(time).setValue(apt).addOnFailureListener(v -> FaildSetValue(v));;
+        refdb.child("DoctorAppointments").child(docid).child(date).child(time).setValue(apt).addOnFailureListener(v -> FaildSetValue(v));;
 
 
     }
