@@ -11,6 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HMO">
+        <activity android:name=".SetAppointment"></activity>
+        <activity android:name=".ConfirmAppointment" />
+        <activity android:name=".BookAppointment" />
         <activity
             android:name=".MainNavigator"
             android:label="@string/title_activity_main2" />

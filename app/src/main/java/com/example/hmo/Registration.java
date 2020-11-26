@@ -2,6 +2,7 @@ package com.example.hmo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,20 +11,38 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class Registration extends AppCompatActivity {
     private EditText userID, userFN, userLN, userEmail, userPass;
+    private NewMember newmmbr;
+    private FirebaseDatabase fdb ;
+    private DatabaseReference refdb;
+    private FirebaseAuth mAuth ;
+    private static final String TAG = "MyActivity";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+        // Connect to DB
+        fdb = FirebaseDatabase.getInstance();
+        refdb =  fdb.getInstance().getReference("Users");
+        // Connect to Authntication
+        mAuth = FirebaseAuth.getInstance();
 
+        //Get info from UI
         userID = findViewById(R.id.userID);
         userFN = findViewById(R.id.userFirstName);
         userLN = findViewById(R.id.userLastName);
@@ -52,27 +71,74 @@ public class Registration extends AppCompatActivity {
         else if (localUserPass.isEmpty())
             userPass.setError("שדה חובה");
         else {
-            FirebaseDatabase.getInstance().getReference("Users").child(localUserID).addValueEventListener(new ValueEventListener() {
+            newmmbr = new NewMember(localUserID, localUserFN, localUserLN, localUserEmail, localUserPass);
+            mAuth.createUserWithEmailAndPassword(localUserEmail, localUserPass)
+                    .addOnCompleteListener(this, task -> NewAuthUser(task));
+
+        }
+    }
+
+    private void NewAuthUser(Task<AuthResult> task){
+        if (task.isSuccessful()) {
+            // Sign in success, update UI with the signed-in user's information
+            Log.d(TAG, "createUserWithEmail:success");
+            FirebaseUser user = mAuth.getCurrentUser();
+            newmmbr.setUid(user.getUid());
+            refdb.child(newmmbr.getUserID()).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.getValue() == null) { //That is the ID does not exist
-                        NewMember member = new NewMember(localUserFN, localUserLN, localUserEmail, localUserPass);
-                        insertNewMember(member, localUserID);
-                    } else
-                        Toast.makeText(getApplicationContext(), "Error! ID already exist", Toast.LENGTH_LONG).show();
-                }
+                        insertNewMember(newmmbr, newmmbr.getUserID());
 
+                    } else{
+
+                        Toast.makeText(getApplicationContext(), "Error! ID already exist", Toast.LENGTH_LONG).show();
+                    }
+                }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
             });
+        } else {
+            // If sign in fails, display a message to the user.
+            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+            Toast.makeText(Registration.this, "Authentication failed.",
+                    Toast.LENGTH_SHORT).show();
+
         }
-    }
+
+    };
+
+//    private void checkDB() {
+//        refdb.child(newmmbr.getUserID()).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                if (dataSnapshot.getValue() == null) { //That is the ID does not exist
+//                    insertNewMember(newmmbr, newmmbr.getUserID());
+//                } else
+//                    Toast.makeText(getApplicationContext(), "Error! ID already exist", Toast.LENGTH_LONG).show();
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//    }
 
     private void insertNewMember(NewMember member, String ID) {
-        FirebaseDatabase.getInstance().getReference("Users").child(ID).setValue(member);
-        Toast.makeText(getApplicationContext(), "נרשמת בהצלחה", Toast.LENGTH_LONG).show();
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        refdb.child(ID).setValue(member).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(getApplicationContext(), "נרשמת בהצלחה", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), "משהו השתבש", Toast.LENGTH_LONG).show();
+            }
+        }) ;
+
     }
 }
