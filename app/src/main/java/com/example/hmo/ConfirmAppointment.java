@@ -33,7 +33,7 @@ public class ConfirmAppointment extends AppCompatActivity {
 
     private void ConfirmBooking() {
         // Changing appointments settings
-        apt.setAvilable(false);
+        apt.setAvailable(false);
         apt.setUserID(user.getUserID());
         apt.setUserName(user.getUserFirstName());
         apt.setUserLastName(user.getUserLastName());

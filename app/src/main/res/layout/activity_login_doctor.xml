@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
     android:layout_alignParentEnd="true"
-    tools:context=".ClientLogin">
+    tools:context=".DoctorLogin">
 
     <TextView
         android:id="@+id/txt_TipTitle"
@@ -156,7 +156,7 @@
         app:layout_constraintVertical_bias="0.382" />
 
     <Button
-        android:id="@+id/button_medicalFile"
+        android:id="@+id/button_DocSchedules"
         android:layout_width="172dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#87BADD"

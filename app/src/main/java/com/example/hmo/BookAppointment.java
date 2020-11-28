@@ -87,7 +87,7 @@ public class BookAppointment extends AppCompatActivity {
 
                             for (DataSnapshot value : snapshot.getChildren()) {
                                 Appointment apt = value.getValue(Appointment.class);
-                                if (apt.getAvilable()) {
+                                if (apt.getAvailable()) {
                                     listapt.add(apt);
                                 }
                             }
