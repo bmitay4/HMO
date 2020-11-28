@@ -1,78 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:layoutDirection="ltr"
+    android:layout_alignParentEnd="true"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/box_inset_layout_padding"
-    tools:context=".Home"
-    tools:deviceIds="wear">
+    android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/Button_Clients"
-        android:layout_width="175dp"
+        android:id="@+id/Button_Drugs"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#87BADD"
-        android:text="ניהול\nהלקוחות"
-        android:textSize="20sp"
+        android:text="ניהול מרשמים"
+        android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.936"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.376" />
-
-    <Button
-        android:id="@+id/Button_Messages"
-        android:layout_width="175dp"
-        android:layout_height="75dp"
-        android:backgroundTint="#87BADD"
-        android:text="ניהול הודעות"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.067"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.376" />
+        app:layout_constraintVertical_bias="0.6" />
 
     <Button
         android:id="@+id/Button_Doctors"
-        android:layout_width="175dp"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#87BADD"
         android:text="ניהול הצוות הרפואי"
-        android:textSize="20sp"
+        android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.936"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.246" />
+        app:layout_constraintVertical_bias="0.20" />
+
+    <Button
+        android:id="@+id/Button_Messages"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#87BADD"
+        android:text="ניהול הודעות אישיות"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
 
     <Button
         android:id="@+id/Button_Queues"
-        android:layout_width="175dp"
-        android:layout_height="75dp"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
         android:backgroundTint="#87BADD"
         android:text="ניהול תורים"
-        android:textSize="20sp"
+        android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.067"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.246" />
+        app:layout_constraintVertical_bias="0.4" />
+
+    <Button
+        android:id="@+id/Button_Clients"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#87BADD"
+        android:text="ניהול הלקוחות"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3" />
 
     <ImageView
-        android:id="@+id/mainLogoImg3"
-        android:layout_width="125dp"
-        android:layout_height="115dp"
+        android:id="@+id/Img_DocsLogo"
+        android:layout_width="86dp"
+        android:layout_height="79dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025"
+        app:layout_constraintVertical_bias="0.024"
         app:srcCompat="@drawable/minilogo" />
+
+    <TextView
+        android:id="@+id/txt_DocsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="לוח ניהול ותפעול"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.057" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

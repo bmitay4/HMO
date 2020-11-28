@@ -14,9 +14,6 @@
         <activity android:name=".SetAppointment"></activity>
         <activity android:name=".ConfirmAppointment" />
         <activity android:name=".BookAppointment" />
-        <activity
-            android:name=".MainNavigator"
-            android:label="@string/title_activity_main2" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,9 +23,10 @@
         </activity>
         <activity android:name=".Registration" />
         <activity android:name=".MainLogin" />
-        <activity android:name=".RegistrationDoctors" />
         <activity android:name=".Management" />
         <activity android:name=".DoctorsPanel" />
+        <activity android:name=".DoctorLogin" />
+        <activity android:name=".ClientLogin" />
     </application>
 
 </manifest>

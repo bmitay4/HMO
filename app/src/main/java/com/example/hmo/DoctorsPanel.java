@@ -7,14 +7,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -26,31 +28,35 @@ public class DoctorsPanel extends AppCompatActivity {
     private ImageView refresh;
     private EditText doctorID, doctorFN, doctorLN, doctorEmail, doctorPass, doctorSpecs;
     private ArrayList<Object> userInfo;
+    private Button createDoc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.doctors_panel);
+        setContentView(R.layout.activity_management_doctor);
 
-        TextView mTextView = findViewById(R.id.Text_Title);
-        refresh = findViewById(R.id.refresh);
-        spinner = findViewById(R.id.Spinner);
+        setValues();
         String[] items = new String[]{"Refresh DB"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+
         spinner.setAdapter(adapter);
         refresh.setOnClickListener(v -> getDoctors());
+        createDoc.setOnClickListener(v -> tryRegister());
 
-        doctorID = findViewById(R.id.userID2);
-        doctorFN = findViewById(R.id.userFirstName2);
-        doctorLN = findViewById(R.id.userLastName2);
-        doctorEmail = findViewById(R.id.userEmail2);
-        doctorPass = findViewById(R.id.userPassword2);
-        doctorSpecs = findViewById(R.id.specs);
+    }
 
-        Button registerButton = findViewById(R.id.createAccountButton_);
-
-        registerButton.setOnClickListener(v -> tryRegister());
-
+    private void setValues() {
+        refresh = findViewById(R.id.Button_MDocRefresh);
+        spinner = findViewById(R.id.MDocSpinner);
+        refresh = findViewById(R.id.Button_MDocRefresh);
+        spinner = findViewById(R.id.MDocSpinner);
+        doctorID = findViewById(R.id.txt_MDocID);
+        doctorFN = findViewById(R.id.txt_MDocFN);
+        doctorLN = findViewById(R.id.txt_MDocLN);
+        doctorEmail = findViewById(R.id.txt_MDocEmail);
+        doctorPass = findViewById(R.id.txt_MDocsPassword);
+        doctorSpecs = findViewById(R.id.txt_MDocSpecialization);
+        createDoc = findViewById(R.id.Button_MDocsCreate);
     }
 
     private void getDoctors() {
@@ -61,22 +67,16 @@ public class DoctorsPanel extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot value : dataSnapshot.getChildren()) {
                     int token = Objects.requireNonNull(value.getValue()).toString().indexOf('=');
-                    userInfo.add(value.getValue().toString().substring(token+1));
+                    userInfo.add(value.getValue().toString().substring(token + 1));
                 }
                 if (userInfo.size() == 0)
                     setSpinner(new String[]{"No Doctors in DB"});
-                else{
+                else {
                     String[] items = new String[userInfo.size()];
                     for (int i = 0; i < userInfo.size(); i++) {
-                        int token = userInfo.get(i).toString().indexOf('=');
-//                        items[i] = userInfo.get(i).toString().substring(token);
                         items[i] = userInfo.get(i).toString().replaceAll("[a-zA-Z=@.{}0-9,]", "");
-
-                        System.out.println(items[i]);
-
                     }
                     setSpinner(items);
-
                 }
             }
 
@@ -85,10 +85,12 @@ public class DoctorsPanel extends AppCompatActivity {
             }
         });
     }
-    private void setSpinner(String[] list){
+
+    private void setSpinner(String[] list) {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, list);
         spinner.setAdapter(adapter);
     }
+
     private void tryRegister() {
         String localDocID = doctorID.getText().toString();
         String localDocFN = doctorFN.getText().toString();
@@ -96,29 +98,39 @@ public class DoctorsPanel extends AppCompatActivity {
         String localDocEmail = doctorEmail.getText().toString();
         String localDocPass = doctorPass.getText().toString();
         String localDocSpecs = doctorSpecs.getText().toString();
+        NewDoctor doctor;
 
 
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("Doctors");
 
-        FirebaseDatabase.getInstance().getReference("Doctors").child(localDocID).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue() == null) { //That is the ID does not exist
-                    NewDoctor member = new NewDoctor(localDocFN, localDocLN, localDocEmail, localDocPass, localDocSpecs);
-                    insertNewMember(member, localDocID);
-                } else
-                    Toast.makeText(getApplicationContext(), "Error! ID already exist", Toast.LENGTH_LONG).show();
-            }
+        doctor = new NewDoctor("", localDocID, localDocFN, localDocLN, localDocEmail, localDocPass, localDocSpecs);
+        mAuth.createUserWithEmailAndPassword(localDocEmail, localDocPass).
+                addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        doctor.setAuthID(user.getUid());
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                        reference.child(localDocID).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                //Verify that ID does isn't exist
+                                if (snapshot.getValue() == null) {
+                                    reference.child(localDocID).setValue(doctor);
+                                    Toast.makeText(getApplicationContext(), "הרופא נוסף בהצלחה", Toast.LENGTH_LONG).show();
+                                    startActivity(new Intent(getApplicationContext(), DoctorsPanel.class));
+                                } else
+                                    Toast.makeText(getApplicationContext(), "Error! ID already exist", Toast.LENGTH_LONG).show();
+                            }
 
-            }
-        });
-    }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
 
-    private void insertNewMember(NewDoctor member, String ID) {
-        FirebaseDatabase.getInstance().getReference("Doctors").child(ID).setValue(member);
-        Toast.makeText(getApplicationContext(), "הרופא התווסף בהצלחה", Toast.LENGTH_LONG).show();
-        startActivity(new Intent(getApplicationContext(), Management.class));
+                            }
+                        });
+                    } else
+                        Toast.makeText(DoctorsPanel.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
+                });
     }
 }

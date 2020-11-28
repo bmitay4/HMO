@@ -3,89 +3,77 @@ package com.example.hmo;
 import java.io.Serializable;
 
 public class NewDoctor implements Serializable {
-    private String uid,userID,userFirstName, userLastName, userEmail, userPass, userSpec;
+    private String authID, userID, userFirstName, userLastName, userEmail, userPassword, userSpec;
 
-    public NewDoctor() {
+    //no-argument constructor
+    public NewDoctor(){
+
     }
-
-    public NewDoctor(String uid, String userID, String userFirstName, String userLastName, String userEmail, String userPass, String userSpec) {
-        this.uid = uid;
-        this.userID = userID;
-        this.userFirstName = userFirstName;
-        this.userLastName = userLastName;
-        this.userEmail = userEmail;
-        this.userPass = userPass;
-        this.userSpec = userSpec;
-    }
-
-    public NewDoctor(String userID, String userFirstName, String userLastName, String userEmail, String userPass, String userSpec) {
-        this.userID = userID;
-        this.userFirstName = userFirstName;
-        this.userLastName = userLastName;
-        this.userEmail = userEmail;
-        this.userPass = userPass;
-        this.userSpec = userSpec;
-    }
-
-    public NewDoctor(String firstName, String lastName, String email, String Pass, String spec) {
+    public NewDoctor(String aID, String uID, String firstName, String lastName, String email, String Pass, String spec) {
+        this.authID = aID;
+        this.userID = uID;
         this.userFirstName = firstName;
         this.userLastName = lastName;
         this.userEmail = email;
-        this.userPass = Pass;
+        this.userPassword = Pass;
         this.userSpec = spec;
+    }
+    //Getters
+    public String getAuthID() {
+        return authID;
+    }
+
+    public String getUserID() {
+        return userID;
     }
 
     public String getUserFirstName() {
         return userFirstName;
     }
 
-    public void setUserFirstName(String userFirstName) {
-        this.userFirstName = userFirstName;
-    }
-
     public String getUserLastName() {
         return userLastName;
-    }
-
-    public void setUserLastName(String userLastName) {
-        this.userLastName = userLastName;
     }
 
     public String getUserEmail() {
         return userEmail;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public String getUserPassword() {
+        return userPassword;
     }
 
     public String getUserSpec() {
         return userSpec;
     }
 
-    public void setUserSpec(String userSpec) {
-        this.userSpec = userSpec;
-    }
-    public String getUserID() {
-        return userID;
+    //Setters
+
+    public void setAuthID(String authID) {
+        this.authID = authID;
     }
 
     public void setUserID(String userID) {
         this.userID = userID;
     }
-    public String getUserPass() {
-        return userPass;
+
+    public void setUserFirstName(String userFirstName) {
+        this.userFirstName = userFirstName;
+    }
+
+    public void setUserLastName(String userLastName) {
+        this.userLastName = userLastName;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public void setUserPass(String userPass) {
-        this.userPass = userPass;
+        this.userPassword = userPass;
     }
 
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setUserSpec(String userSpec) {
+        this.userSpec = userSpec;
     }
 }
