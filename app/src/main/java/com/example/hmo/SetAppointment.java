@@ -125,7 +125,7 @@ public class SetAppointment extends AppCompatActivity {
                 true);
         // Insert in to Appointments -> DocID -> Date -> Time
         // Check if faild to do so.
-        refdb.child(first_apt).setValue(e1).addOnFailureListener(new OnFailureListener() {
+        refdb.child(time).setValue(e1).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Log.d(TAG, "problem inserting appointment " + time + " " + e);

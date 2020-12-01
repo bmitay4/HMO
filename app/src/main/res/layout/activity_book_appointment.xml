@@ -8,8 +8,8 @@
 
     <ListView
         android:id="@+id/doclist"
-        android:layout_width="410dp"
-        android:layout_height="234dp"
+        android:layout_width="412dp"
+        android:layout_height="120dp"
         app:layout_constraintBottom_toTopOf="@+id/pickdate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,19 +17,19 @@
 
     <CalendarView
         android:id="@+id/pickdate"
-        android:layout_width="412dp"
-        android:layout_height="259dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.456" />
+        app:layout_constraintVertical_bias="0.381" />
 
     <ListView
         android:id="@+id/aptlist"
-        android:layout_width="412dp"
-        android:layout_height="277dp"
+        android:layout_width="402dp"
+        android:layout_height="227dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

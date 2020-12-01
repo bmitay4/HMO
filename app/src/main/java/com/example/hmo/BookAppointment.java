@@ -31,6 +31,7 @@ public class BookAppointment extends AppCompatActivity {
     private CalendarView cal;
     private ArrayAdapter arrdoc, times;
     private ArrayList<String> listingdocs;
+    private ArrayList<NewDoctor> docList;
     private String date, docid;
 
     @Override
@@ -49,14 +50,18 @@ public class BookAppointment extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 listingdocs = new ArrayList<String>();
+                docList = new ArrayList<>();
                 for (DataSnapshot doc : snapshot.getChildren()) {
                     NewDoctor d = doc.getValue(NewDoctor.class);
                     listingdocs.add(d.getUserFirstName()+" "+d.getUserLastName());
+                    docList.add(d);
                 }
-                String[] a = new String[listingdocs.size()];
-                for (int i = 0; i < a.length; i++) {
-                    a[i] = listingdocs.get(i);
-                }
+//                String[] a = new String[listingdocs.size()];
+//                for (int i = 0; i < a.length; i++) {
+//                    NewDoctor doc = doctorList.get(i);
+//                    a[i] = doc.getUserFirstName() + " " + doc.getUserLastName();
+////                    a[i] = listingdocs.get(i);
+//                }
                 arrdoc = new ArrayAdapter(BookAppointment.this, android.R.layout.simple_list_item_1, listingdocs);
                 doclist.setAdapter(arrdoc);
             }
@@ -67,7 +72,14 @@ public class BookAppointment extends AppCompatActivity {
         });
 
         // TODO: Need to make on click listener for the list to pick doc
-        docid = "doc";
+        doclist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                docid = docList.get(position).getUserID();
+                System.out.println(docid);
+            }
+        });
+
 
         // pick date
         cal.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -87,6 +99,7 @@ public class BookAppointment extends AppCompatActivity {
 
                             for (DataSnapshot value : snapshot.getChildren()) {
                                 Appointment apt = value.getValue(Appointment.class);
+                                System.out.println(apt.toString());
                                 if (apt.getAvailable()) {
                                     listapt.add(apt);
                                 }
@@ -105,7 +118,7 @@ public class BookAppointment extends AppCompatActivity {
                                 @Override
 
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                    Appointment picked_apt = (Appointment) parent.getItemAtPosition(position);
+                                    Appointment picked_apt = (Appointment) listapt.get(position);
                                     Intent i = new Intent(BookAppointment.this, ConfirmAppointment.class);
                                     i.putExtra("user", user);
                                     i.putExtra("picked_apt", picked_apt);

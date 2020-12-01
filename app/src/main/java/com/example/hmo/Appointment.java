@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Appointment implements Serializable {
     private String date, time, docID, docName, docLastName, userID, userName, userLastName;
-    private boolean isAvailable = true;
+    private boolean isAvailable;
 
     public Appointment() {
     }
@@ -29,6 +29,21 @@ public class Appointment implements Serializable {
         this.userID = userID;
         this.userName = userName;
         this.isAvailable = available;
+    }
+
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "date='" + date + '\'' +
+                ", time='" + time + '\'' +
+                ", docID='" + docID + '\'' +
+                ", docName='" + docName + '\'' +
+                ", docLastName='" + docLastName + '\'' +
+                ", userID='" + userID + '\'' +
+                ", userName='" + userName + '\'' +
+                ", userLastName='" + userLastName + '\'' +
+                ", isAvailable=" + isAvailable +
+                '}';
     }
 
     public String getDate() {

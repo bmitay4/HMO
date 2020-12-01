@@ -27,6 +27,9 @@ public class ConfirmAppointment extends AppCompatActivity {
         apt = (Appointment) getIntent().getSerializableExtra("picked_apt");
         confirm = findViewById(R.id.confirm);
 
+        fdb = FirebaseDatabase.getInstance();
+        refdb = fdb.getReference();
+
         confirm.setOnClickListener(v -> ConfirmBooking());
 
     }
@@ -42,6 +45,7 @@ public class ConfirmAppointment extends AppCompatActivity {
         String date = apt.getDate().replace(".","");
         String time = apt.getTime();
         String docid = apt.getDocID();
+
         refdb.child("Appointments").child(docid).child(date).child(time).setValue(apt).addOnFailureListener(v -> FaildSetValue(v));
         // Book in user appointment
         String userid = user.getUserID();
