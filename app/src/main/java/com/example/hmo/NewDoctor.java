@@ -3,12 +3,24 @@ package com.example.hmo;
 import java.io.Serializable;
 
 public class NewDoctor implements Serializable {
-    private String authID, userID, userFirstName, userLastName, userEmail, userPassword, userSpec;
+    private String authID, userID, userFirstName, userLastName, userEmail, userPassword, userSpec, userGender;
 
     //no-argument constructor
     public NewDoctor(){
 
     }
+
+    public NewDoctor(String authID, String userID, String userFirstName, String userLastName, String userEmail, String userPassword, String userSpec, String userGender) {
+        this.authID = authID;
+        this.userID = userID;
+        this.userFirstName = userFirstName;
+        this.userLastName = userLastName;
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+        this.userSpec = userSpec;
+        this.userGender = userGender;
+    }
+
     public NewDoctor(String aID, String uID, String firstName, String lastName, String email, String Pass, String spec) {
         this.authID = aID;
         this.userID = uID;
@@ -75,5 +87,17 @@ public class NewDoctor implements Serializable {
 
     public void setUserSpec(String userSpec) {
         this.userSpec = userSpec;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
+    public String getUserGender() {
+        return userGender;
+    }
+
+    public void setUserGender(String userGender) {
+        this.userGender = userGender;
     }
 }

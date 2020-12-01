@@ -25,6 +25,11 @@ public class DoctorLogin extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button msg = findViewById(R.id.button_DocMail);
+        Intent intent=new Intent(getApplicationContext(), mailDocActicity.class);
+        intent.putExtra("doctor",doctor);
+        msg.setOnClickListener(v -> startActivity(intent));
     }
     private void setValues(){
         DocSchedules = findViewById(R.id.button_DocSchedules);

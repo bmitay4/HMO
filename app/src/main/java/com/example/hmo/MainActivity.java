@@ -18,7 +18,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
-    Button registerButton, loginButton, teamButton, forgotPass;
+
+    private FirebaseDatabase fr;
+    private DatabaseReference refdb;
+    private Button registerButton, loginButton, teamButton, forgotPass;
     private EditText userID, userPassword;
     private NewMember member;
     private NewDoctor doctor;
@@ -34,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         teamButton.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), Management.class)));
 //        forgotPass.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), RegistrationDoctors.class)));
         registerButton.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), Registration.class)));
-        loginButton.setOnClickListener(v -> tryLogin());
+        loginButton.setOnClickListener(v -> login());
     }
 
     private void setValues() {
@@ -45,6 +48,62 @@ public class MainActivity extends AppCompatActivity {
         userID = findViewById(R.id.textBoxID);
         userPassword = findViewById(R.id.textBoxPass);
     }
+
+    private void login(){
+        String localUserID = userID.getText().toString();
+        String localUserPass = userPassword.getText().toString();
+
+        if(!checkFields(localUserID, localUserPass)){ return;}
+        fr = FirebaseDatabase.getInstance();
+        refdb = fr.getReference();
+        DatabaseReference ref_user = refdb.child("Users");
+        DatabaseReference ref_doc = refdb.child("Doctors");
+
+        ref_user.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                member = (NewMember) snapshot.child(localUserID).getValue(NewMember.class);
+                if(member == null){ return;}
+                else if(!member.getUserPassword().equals(localUserPass) )
+                {
+                    Toast.makeText(MainActivity.this, "סיסמה לא נכונה", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                Toast.makeText(MainActivity.this, "התחברת בהצלחה", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(), ClientLogin.class);
+                intent.putExtra("member", member);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MainActivity.this, "DB-User failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+        ref_doc.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                doctor = (NewDoctor) snapshot.child(localUserID).getValue(NewDoctor.class);
+                if(doctor == null){ return;}
+                else if(!doctor.getUserPassword().equals(localUserPass) )
+                {
+                    Toast.makeText(MainActivity.this, "סיסמה לא נכונה", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                Toast.makeText(MainActivity.this, "התחברת בהצלחה", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(), DoctorLogin.class);
+                intent.putExtra("doctor", doctor);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
 
     private void tryLogin() {
         // Get user ID & password

@@ -27,6 +27,8 @@
         <activity android:name=".DoctorsPanel" />
         <activity android:name=".DoctorLogin" />
         <activity android:name=".ClientLogin" />
+        <activity android:name=".MailUserActivity" />
+        <activity android:name=".SendMassageActivity" />
     </application>
 
 </manifest>

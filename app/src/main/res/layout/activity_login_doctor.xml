@@ -114,7 +114,7 @@
         app:layout_constraintVertical_bias="0.034" />
 
     <Button
-        android:id="@+id/button_writeToDoc"
+        android:id="@+id/button_DocMail"
         android:layout_width="172dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#87BADD"

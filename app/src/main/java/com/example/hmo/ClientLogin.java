@@ -3,6 +3,8 @@ package com.example.hmo;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +21,15 @@ public class ClientLogin extends AppCompatActivity {
         webURL.setOnClickListener(view -> {
             Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse("https://datadashboard.health.gov.il/COVID-19/general"));
             startActivity(browser);
+        });
+        Button msg = findViewById(R.id.button_DocMail);
+        Intent intent=new Intent(getApplicationContext(), MailUserActivity.class);
+        intent.putExtra("member",member);
+        msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(intent);
+            }
         });
     }
     private void setValues(){
