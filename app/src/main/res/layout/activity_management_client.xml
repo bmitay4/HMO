@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layoutDirection="ltr"
+    android:layout_alignParentEnd="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ClientsPanel">
+
+    <Button
+        android:id="@+id/button_MClientToHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#87BADD"
+        android:gravity="right|center_vertical"
+        android:text="למסך הבית"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.948" />
+
+    <ListView
+        android:id="@+id/MClientList"
+        android:layout_width="205dp"
+        android:layout_height="300dp"
+        android:layout_margin="10dp"
+        android:gravity="right|center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.922"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.243" />
+
+    <TextView
+        android:id="@+id/txt_MClientTitle"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:gravity="right|center_vertical"
+        android:text="ניהול לקוחות המרפאה"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.839"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.054" />
+
+    <ImageView
+        android:id="@+id/Img_MClientLogo"
+        android:layout_width="87dp"
+        android:layout_height="82dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.024"
+        app:srcCompat="@drawable/minilogo" />
+
+    <TextView
+        android:id="@+id/txt_MClientFullInfo"
+        android:layout_width="305dp"
+        android:layout_height="162dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.773"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.753" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

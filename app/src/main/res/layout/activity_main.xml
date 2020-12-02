@@ -50,7 +50,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.024"
-        app:srcCompat="@drawable/healthminister" />
+        app:srcCompat="@drawable/healthminister"/>
+
+    <ImageView
+        android:id="@+id/MainLogoImg"
+        android:layout_width="327dp"
+        android:layout_height="227dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.105"
+        app:srcCompat="@drawable/logintitle" />
 
     <EditText
         android:id="@+id/textBoxPass"
@@ -67,17 +78,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.641" />
-
-    <ImageView
-        android:id="@+id/MainLogoImg"
-        android:layout_width="327dp"
-        android:layout_height="227dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.105"
-        app:srcCompat="@drawable/logintitle" />
 
     <EditText
         android:id="@+id/textBoxID"

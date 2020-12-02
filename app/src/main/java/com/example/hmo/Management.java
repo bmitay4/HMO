@@ -16,7 +16,7 @@ public class Management extends AppCompatActivity {
 
         setValues();
         Doctors_Panel.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), DoctorsPanel.class)));
-//        Clients_Panel.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), RegistrationDoctors.class)));
+        Clients_Panel.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), ClientsPanel.class)));
 //        Queues_Panel.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), RegistrationDoctors.class)));
 //        Messages_Panel.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), RegistrationDoctors.class)));
 //        Drugs_Panel.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), RegistrationDoctors.class)));

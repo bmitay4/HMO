@@ -1,5 +1,7 @@
 package com.example.hmo;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.Serializable;
 
 public class NewMember implements Serializable {
@@ -29,6 +31,16 @@ public class NewMember implements Serializable {
         this.userEmail = email;
         this.userPassword = password;
         this.userDOB = DOB;
+    }
+
+    @NotNull
+    @Override
+    public String toString() {
+        return "תעודת זהות: " + userID + "\n" +
+                "שם מלא: " + userFirstName + " " + userLastName + "\n" +
+                "כתובת דואל: " + userEmail + "\n" +
+                "תאריך לידה: " + userDOB + "\n" +
+                "מין: " + userGender;
     }
 
     //Setters
