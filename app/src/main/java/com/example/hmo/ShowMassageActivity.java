@@ -12,23 +12,35 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ShowMassageActivity extends AppCompatActivity {
     private TextView subjest, content,from;
-    private Massages m=(Massages) getIntent().getSerializableExtra("msg");
+    private View decorView;
+    private Massages msg;
+    private NewMember member;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_massage);
-        View decorView = getWindow().getDecorView();
+        decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
+        member = (NewMember)getIntent().getSerializableExtra("member");
+        msg =(Massages) getIntent().getSerializableExtra("msg");
         subjest = findViewById(R.id.subjectFrom);
-        subjest.setText("נושא:"+m.getSubject());
+        subjest.setText("נושא:"+msg.getSubject());
+
         content = findViewById(R.id.contentFrom);
-        content.setText(m.getContent());
+        content.setText(msg.getContent());
         from = findViewById(R.id.sendFrom);
-        from.setText("הודעה מ"+m.getFromName());
+        from.setText("הודעה מ"+msg.getFromName());
 
         Button replyButton = findViewById(R.id.reply);
-        replyButton.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), ReplyMassageActivity.class)));
+        replyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ShowMassageActivity.this,ReplyMassageActivity.class);
+                i.putExtra("msg",msg);
+                i.putExtra("member",member);
+            }
+        });
     }
 }
 

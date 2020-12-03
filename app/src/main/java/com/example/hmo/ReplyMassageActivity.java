@@ -2,6 +2,7 @@ package com.example.hmo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +11,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -17,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ReplyMassageActivity extends AppCompatActivity {
     private EditText subject, content;
-    private Massages m=new Massages();
+    private Massages m;
     private NewMember member;
 
 
@@ -50,17 +54,33 @@ public class ReplyMassageActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     Massages newM=new Massages(localsubject,localcontent,m.getToID(),m.getToName(),m.getfromID(),m.getFromName());
-                    FirebaseDatabase.getInstance().getReference("Massage").child(m.getfromID()).setValue(newM);
-                    startActivity(new Intent(getApplicationContext(), mailDocActicity.class));
+                    FirebaseDatabase.getInstance().getReference("Massage").child(m.getfromID()).setValue(newM).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(getApplicationContext(),"ההודעה נשלחה" , Toast.LENGTH_LONG).show();
+                            Intent intent=new Intent(getApplicationContext(), ClientLogin.class);
+                            intent.putExtra("member",member);
+                            startActivity(intent);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(),"הודעה לא נשלחה" , Toast.LENGTH_LONG).show();
+                            Log.d("DB set value problem:","Could not send the msg");
+                        }
+                    });
+
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-
+                    Toast.makeText(getApplicationContext(),"בעיה בהתחברות לשרת" , Toast.LENGTH_LONG).show();
+                    Log.d("DB problem:","Could not connect to the server");
                 }
             });
         }
     }
 }
+
 
 

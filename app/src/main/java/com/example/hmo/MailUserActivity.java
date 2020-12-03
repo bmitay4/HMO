@@ -20,28 +20,57 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class MailUserActivity extends Activity {
-    private ListView simpleList;
-    private String [] msgs;
-    private ArrayList<Massages> m;
-    private NewMember member;
 
+    private ListView simpleList;
+    private View decorView;
+    private String [] msgs;
+    private ArrayList<Massages> msg_list;
+    private NewMember member;
+    private FirebaseDatabase fdb;
+    private DatabaseReference refdb;
+
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_mail_user);
+
+        decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+        member = (NewMember) getIntent().getSerializableExtra("member");
+        simpleList = (ListView) findViewById(R.id.userMails);
+        getMassages();
+
+
+//        simpleList = (ListView) findViewById(R.id.userMails);
+//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MailUserActivity.this, android.R.layout.simple_list_item_1, msgs);
+//        simpleList.setAdapter(arrayAdapter);
+        simpleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), ShowMassageActivity.class);
+                intent.putExtra("msg",msg_list.get(position));
+                intent.putExtra("member",member);
+                startActivity(intent);
+            }
+        });
+
+    }
 
     private void getMassages() {
-        FirebaseDatabase fdb;
-        DatabaseReference refdb;
+
         fdb = FirebaseDatabase.getInstance();
         refdb = fdb.getReference();
         refdb.child("Massages").child(member.getUserID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                m = new ArrayList<Massages>();
+                msg_list = new ArrayList<Massages>();
                 for (DataSnapshot mes : snapshot.getChildren()) {
                     Massages temp = mes.getValue(Massages.class);
-                    m.add(temp);
+                    msg_list.add(temp);
                 }
-                String[] a = new String[m.size()];
+                String[] a = new String[msg_list.size()];
                 for (int i = 0; i < a.length; i++) {
-                    a[i] = m.get(i).getFromName()+"הודעה חדשה מ";
+                    a[i] = msg_list.get(i).getFromName()+"הודעה חדשה מ";
                 }
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MailUserActivity.this, android.R.layout.simple_list_item_1, a);
                 simpleList.setAdapter(arrayAdapter);
@@ -51,34 +80,6 @@ public class MailUserActivity extends Activity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
 
-        });
-
-    }
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mail_user);
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-        member = (NewMember) getIntent().getSerializableExtra("member");
-
-        simpleList = (ListView) findViewById(R.id.userMails);
-        Button newMassage = findViewById(R.id.newMassage);
-        Intent intent=new Intent(getApplicationContext(), SendMassageActivity.class);
-        intent.putExtra("member",member);
-        newMassage.setOnClickListener(v -> startActivity(intent));
-
-        getMassages();
-//        simpleList = (ListView) findViewById(R.id.userMails);
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MailUserActivity.this, android.R.layout.simple_list_item_1, msgs);
-//        simpleList.setAdapter(arrayAdapter);
-        simpleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), ShowMassageActivity.class);
-                intent.putExtra("msg",m.get(position));
-                intent.putExtra("member",member);
-                startActivity(intent);
-            }
         });
 
     }
