@@ -2,8 +2,10 @@ package com.example.hmo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Registration extends AppCompatActivity {
     private EditText userID, userFN, userLN, userEmail, userDOB, userPass;
+    private Spinner userGender;
     private Button registerButton;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,9 @@ public class Registration extends AppCompatActivity {
         userEmail = findViewById(R.id.txt_RClientEmail);
         userPass = findViewById(R.id.txt_RClientPass);
         userDOB = findViewById(R.id.txt_RClientDOB);
+        userGender = findViewById(R.id.spinner_userGender);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, new String[]{"בחר מין", "זכר", "נקבה"});
+        userGender.setAdapter(adapter);
         registerButton = findViewById(R.id.Button_RClientRegister);
     }
 
@@ -47,6 +53,8 @@ public class Registration extends AppCompatActivity {
         String localUserEmail = userEmail.getText().toString();
         String localUserDBO = userDOB.getText().toString();
         String localUserPass = userPass.getText().toString();
+        String localUserGender = userGender.getSelectedItem().toString();
+
 
         if (localUserID.isEmpty())
             userID.setError("שדה חובה");
@@ -60,13 +68,15 @@ public class Registration extends AppCompatActivity {
             userDOB.setError("שדה חובה");
         else if (localUserPass.isEmpty())
             userPass.setError("שדה חובה");
+        else if (localUserGender.contains("מין"))
+            System.out.println("No Gender");
         else {
 
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference reference = database.getReference("Users");
             NewMember member;
-            member = new NewMember("", localUserID, localUserFN, localUserLN, localUserEmail, localUserPass, localUserDBO);
+            member = new NewMember("", localUserID, localUserFN, localUserLN, localUserEmail, localUserPass, localUserDBO,localUserGender);
 
             mAuth.createUserWithEmailAndPassword(localUserEmail, localUserPass).
                     addOnCompleteListener(this, task -> {
