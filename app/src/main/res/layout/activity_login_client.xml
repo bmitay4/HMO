@@ -157,7 +157,7 @@
 
     <Button
         android:id="@+id/button_CMedicalFile"
-        android:layout_width="172dp"
+        android:layout_width="175dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#87BADD"
         android:text="צפייה בתורים שלי"

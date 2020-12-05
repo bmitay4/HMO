@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 public class Registration extends AppCompatActivity {
     private EditText userID, userFN, userLN, userEmail, userDOB, userPass;
     private Spinner userGender;
-    private Button registerButton;
+    private Button registerButton, goBack;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +31,7 @@ public class Registration extends AppCompatActivity {
         setValues();
 
         registerButton.setOnClickListener(v -> tryRegister());
+        goBack.setOnClickListener(v->finish());
     }
 
     private void setValues() {
@@ -44,6 +45,7 @@ public class Registration extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, new String[]{"בחר מין", "זכר", "נקבה"});
         userGender.setAdapter(adapter);
         registerButton = findViewById(R.id.Button_RClientRegister);
+        goBack = findViewById(R.id.Button_RClientBackToHome);
     }
 
     private void tryRegister() {

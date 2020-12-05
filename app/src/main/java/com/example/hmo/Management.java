@@ -7,7 +7,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Management extends AppCompatActivity {
-    Button Doctors_Panel, Clients_Panel, Queues_Panel, Messages_Panel, Drugs_Panel;
+    Button Doctors_Panel, Clients_Panel, Queues_Panel, Messages_Panel, Drugs_Panel, goBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +17,7 @@ public class Management extends AppCompatActivity {
         setValues();
         Doctors_Panel.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), DoctorsPanel.class)));
         Clients_Panel.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), ClientsPanel.class)));
+        goBack.setOnClickListener(v->finish());
 //        Queues_Panel.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), RegistrationDoctors.class)));
 //        Messages_Panel.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), RegistrationDoctors.class)));
 //        Drugs_Panel.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), RegistrationDoctors.class)));
@@ -28,5 +29,6 @@ public class Management extends AppCompatActivity {
         Queues_Panel = findViewById(R.id.Button_Queues);
         Messages_Panel = findViewById(R.id.Button_Messages);
         Drugs_Panel = findViewById(R.id.Button_Drugs);
+        goBack = findViewById(R.id.Button_ManagementGoHome);
     }
 }

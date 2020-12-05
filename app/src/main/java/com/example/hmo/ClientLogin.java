@@ -12,7 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 public class ClientLogin extends AppCompatActivity {
     private TextView clientName;
     private NewMember member;
+    private Button sendMsg, bookQueue, watchQueues;
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_client);
@@ -25,9 +27,8 @@ public class ClientLogin extends AppCompatActivity {
             startActivity(browser);
         });
 
-        Button msg = findViewById(R.id.button_DocMail);
-        Button queue = findViewById(R.id.button_queues);
-        queue.setOnClickListener(new View.OnClickListener() {
+
+        bookQueue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), BookAppointment.class);
@@ -36,19 +37,31 @@ public class ClientLogin extends AppCompatActivity {
             }
         });
 
-        Intent intent=new Intent(getApplicationContext(), MailUserActivity.class);
-        intent.putExtra("member",member);
 
-        msg.setOnClickListener(new View.OnClickListener() {
+        sendMsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent=new Intent(getApplicationContext(), MailUserActivity.class);
+                intent.putExtra("member",member);
+                startActivity(intent);
+            }
+        });
+
+        watchQueues.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(), UserAppointment.class);
+                intent.putExtra("member",member);
                 startActivity(intent);
             }
         });
     }
     private void setValues(){
-        clientName = findViewById(R.id.txt_doctorFullName);
         member = (NewMember) getIntent().getSerializableExtra("member");
+        clientName = findViewById(R.id.txt_doctorFullName);
         clientName.setText(member.getUserFirstName()+" "+member.getUserLastName());
+        sendMsg = findViewById(R.id.button_DocMail);
+        bookQueue = findViewById(R.id.button_queues);
+        watchQueues = findViewById(R.id.button_CMedicalFile);
     }
 }

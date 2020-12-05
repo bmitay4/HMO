@@ -5,13 +5,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,26 +25,24 @@ public class BookAppointment extends AppCompatActivity {
 
     private FirebaseDatabase fdb;
     private DatabaseReference refdb;
-    private FirebaseAuth mAuth;
     private NewMember user;
-    private static final String TAG = "MyActivity";
     private ListView doclist, aptlist;
     private CalendarView cal;
     private ArrayAdapter arrdoc, times;
+    private Appointment picked_apt;
     private ArrayList<String> listingdocs;
     private ArrayList<NewDoctor> docList;
     private String date, docid;
+    private Button confirmButton, goBackButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_appointment);
-        user = (NewMember) getIntent().getSerializableExtra("user");
-        fdb = FirebaseDatabase.getInstance();
-        refdb = fdb.getReference();
-        cal = findViewById(R.id.pickdate);
-        doclist = findViewById(R.id.doclist);
-        aptlist = findViewById(R.id.aptlist);
+
+        setValues();
+        goBackButton.setOnClickListener(v -> finish());
+        confirmButton.setOnClickListener(v -> confirmQueue());
 
         // Get list of all the doctors
         refdb.child("Doctors").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -53,7 +52,8 @@ public class BookAppointment extends AppCompatActivity {
                 docList = new ArrayList<>();
                 for (DataSnapshot doc : snapshot.getChildren()) {
                     NewDoctor d = doc.getValue(NewDoctor.class);
-                    listingdocs.add(d.getUserFirstName()+" "+d.getUserLastName());
+                    assert d != null; //Should'nt be NULL at any case
+                    listingdocs.add(d.getUserFirstName() + " " + d.getUserLastName() + ", " + d.getUserSpec());
                     docList.add(d);
                 }
 //                String[] a = new String[listingdocs.size()];
@@ -71,15 +71,14 @@ public class BookAppointment extends AppCompatActivity {
             }
         });
 
+        //Hold Doctor ID after the user picks it
         // TODO: Need to make on click listener for the list to pick doc
         doclist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 docid = docList.get(position).getUserID();
-                System.out.println(docid);
             }
         });
-
 
         // pick date
         cal.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -91,15 +90,15 @@ public class BookAppointment extends AppCompatActivity {
 
                     // Pick the right branch Events -> DocID -> Date
                     DatabaseReference eventrf = refdb.child("Appointments").child(docid).child(d);
-                    // get all the avilable appointments
+
+                    // Gets all the available appointments
                     eventrf.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             ArrayList<Appointment> listapt = new ArrayList<Appointment>();
-
                             for (DataSnapshot value : snapshot.getChildren()) {
                                 Appointment apt = value.getValue(Appointment.class);
-                                System.out.println(apt.toString());
+//                                System.out.println(apt.toString());
                                 if (apt.getAvailable()) {
                                     listapt.add(apt);
                                 }
@@ -116,13 +115,12 @@ public class BookAppointment extends AppCompatActivity {
                             //If clicked on one of the appointments
                             aptlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
-
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                    Appointment picked_apt = (Appointment) listapt.get(position);
-                                    Intent i = new Intent(BookAppointment.this, ConfirmAppointment.class);
-                                    i.putExtra("user", user);
-                                    i.putExtra("picked_apt", picked_apt);
-                                    startActivity(i);
+                                    picked_apt = (Appointment) listapt.get(position);
+//                                    Intent i = new Intent(BookAppointment.this, ConfirmAppointment.class);
+//                                    i.putExtra("user", user);
+//                                    i.putExtra("picked_apt", picked_apt);
+//                                    startActivity(i);
                                 }
                             });
 
@@ -138,6 +136,29 @@ public class BookAppointment extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void setValues() {
+        user = (NewMember) getIntent().getSerializableExtra("user");
+        fdb = FirebaseDatabase.getInstance();
+        refdb = fdb.getReference();
+        cal = findViewById(R.id.pickdate);
+        doclist = findViewById(R.id.doclist);
+        aptlist = findViewById(R.id.aptlist);
+        confirmButton = findViewById(R.id.Button_AppointmentConfirm);
+        goBackButton = findViewById(R.id.Button_AppointmentGoHome);
+    }
+
+    private void confirmQueue() {
+        if (docid != null) {
+            Intent i = new Intent(this, ConfirmAppointment.class);
+            i.putExtra("user", user);
+            i.putExtra("picked_apt", picked_apt);
+            startActivity(i);
+        }
+        else
+            Toast.makeText(this, "לא נבחר רופא או מועד לתור", Toast.LENGTH_LONG).show();
+
     }
 }
 

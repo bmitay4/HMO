@@ -1,5 +1,7 @@
 package com.example.hmo;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.Serializable;
 
 public class Appointment implements Serializable {
@@ -31,19 +33,27 @@ public class Appointment implements Serializable {
         this.isAvailable = available;
     }
 
-    @Override
-    public String toString() {
-        return "Appointment{" +
-                "date='" + date + '\'' +
-                ", time='" + time + '\'' +
-                ", docID='" + docID + '\'' +
-                ", docName='" + docName + '\'' +
-                ", docLastName='" + docLastName + '\'' +
-                ", userID='" + userID + '\'' +
-                ", userName='" + userName + '\'' +
-                ", userLastName='" + userLastName + '\'' +
-                ", isAvailable=" + isAvailable +
-                '}';
+//    @Override
+//    public String toString() {
+//        return "Appointment{" +
+//                "date='" + date + '\'' +
+//                ", time='" + time + '\'' +
+//                ", docID='" + docID + '\'' +
+//                ", docName='" + docName + '\'' +
+//                ", docLastName='" + docLastName + '\'' +
+//                ", userID='" + userID + '\'' +
+//                ", userName='" + userName + '\'' +
+//                ", userLastName='" + userLastName + '\'' +
+//                ", isAvailable=" + isAvailable +
+//                '}';
+//    }
+    @NotNull
+    public String toString(NewMember m) {
+        return "פרטי התור שנקבע לך\n" +
+                "בתאריך " + date + ", בשעה " + time + "\n" +
+                "נקבע תור עבור " + m.getUserFirstName() + " " + m.getUserLastName() + "\n" +
+                "ת.ז. " + m.getUserID() + "\n" +
+                "הרופא המטפל: " + docName + " " + docLastName;
     }
 
     public String getDate() {

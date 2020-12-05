@@ -2,6 +2,7 @@ package com.example.hmo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,10 +26,10 @@ import java.util.Objects;
 
 public class DoctorsPanel extends AppCompatActivity {
     private Spinner spinner;
-    private ImageView refresh;
+    private ImageView refresh, remove;
     private EditText doctorID, doctorFN, doctorLN, doctorEmail, doctorPass, doctorSpecs;
     private ArrayList<Object> userInfo;
-    private Button createDoc;
+    private Button createDoc, goBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,20 +37,26 @@ public class DoctorsPanel extends AppCompatActivity {
         setContentView(R.layout.activity_management_doctor);
 
         setValues();
-        String[] items = new String[]{"Refresh DB"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
 
-        spinner.setAdapter(adapter);
         refresh.setOnClickListener(v -> getDoctors());
         createDoc.setOnClickListener(v -> tryRegister());
+        goBack.setOnClickListener(v->finish());
+        remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO
+                spinner.getSelectedItem().toString();
+                System.out.println("Remove Doctor");
+            }
+        });
 
     }
 
     private void setValues() {
         refresh = findViewById(R.id.Button_MDocRefresh);
         spinner = findViewById(R.id.MDocSpinner);
-        refresh = findViewById(R.id.Button_MDocRefresh);
-        spinner = findViewById(R.id.MDocSpinner);
+        remove = findViewById(R.id.Button_MDocRemove);
+
         doctorID = findViewById(R.id.txt_MDocID);
         doctorFN = findViewById(R.id.txt_MDocFN);
         doctorLN = findViewById(R.id.txt_MDocLN);
@@ -57,6 +64,12 @@ public class DoctorsPanel extends AppCompatActivity {
         doctorPass = findViewById(R.id.txt_MDocsPassword);
         doctorSpecs = findViewById(R.id.txt_MDocSpecialization);
         createDoc = findViewById(R.id.Button_MDocsCreate);
+        goBack = findViewById(R.id.Button_MDocsGoToHome);
+
+        String[] items = new String[]{"Refresh DB"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+
+        spinner.setAdapter(adapter);
     }
 
     private void getDoctors() {

@@ -12,7 +12,7 @@ public class NewMember implements Serializable {
 
     }
 
-    public NewMember(String authID, String userID, String userFirstName, String userLastName, String userEmail, String userDOB, String userPassword, String userGender) {
+    public NewMember(String authID, String userID, String userFirstName, String userLastName, String userEmail, String userPassword, String userDOB, String userGender) {
         this.authID = authID;
         this.userID = userID;
         this.userFirstName = userFirstName;

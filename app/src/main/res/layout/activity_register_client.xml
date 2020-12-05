@@ -8,29 +8,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/Img_RClientHLogo"
-        android:layout_width="122dp"
-        android:layout_height="59dp"
+    <TextView
+        android:id="@+id/txt_MClientTitle2"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:gravity="right|center_vertical"
+        android:text="הרשמה לשירות"
+        android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.977"
+        app:layout_constraintHorizontal_bias="0.894"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024"
-        app:srcCompat="@drawable/healthminister" />
+        app:layout_constraintVertical_bias="0.055" />
 
-    <ImageView
-        android:id="@+id/Img_RClientDoc"
-        android:layout_width="198dp"
-        android:layout_height="390dp"
+    <Button
+        android:id="@+id/Button_RClientRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#87BADD"
+        android:text="הרשמה לשירות"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.939"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.847"
-        app:srcCompat="@drawable/doctorwoman" />
+        app:layout_constraintVertical_bias="0.953" />
+
+    <Button
+        android:id="@+id/Button_RClientBackToHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#87BADD"
+        android:text="חזרה למסך הבית"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.122"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.953" />
 
     <ImageView
         android:id="@+id/Img_RClientLogo"
@@ -38,41 +57,59 @@
         android:layout_height="83dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.048"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.024"
         app:srcCompat="@drawable/minilogo" />
 
-    <Button
-        android:id="@+id/Button_RClientRegister"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:backgroundTint="#87BADD"
-        android:text="הרשמה לשירות"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.953" />
-
     <EditText
-        android:id="@+id/txt_RClientDOB"
+        android:id="@+id/txt_RClientFN"
         android:layout_width="210dp"
         android:layout_height="45dp"
         android:ems="10"
         android:gravity="right|center_vertical"
-        android:hint="תאריך לידה (dd/mm/yyyy)"
-        android:inputType="date"
+        android:hint="שם פרטי"
+        android:inputType="textPersonName"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.925"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.779" />
+        app:layout_constraintVertical_bias="0.374" />
+
+    <EditText
+        android:id="@+id/txt_RClientID"
+        android:layout_width="210dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:gravity="right|center_vertical"
+        android:hint="תעודת זהות"
+        android:inputType="number|textPersonName"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.925"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.533" />
+
+    <EditText
+        android:id="@+id/txt_RClientEmail"
+        android:layout_width="210dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:gravity="right|center_vertical"
+        android:hint='כתובת דוא"ל'
+        android:inputType="textPersonName|textEmailSubject"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.925"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.61" />
 
     <EditText
         android:id="@+id/txt_RClientPass"
@@ -88,55 +125,49 @@
         app:layout_constraintHorizontal_bias="0.925"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.855" />
+        app:layout_constraintVertical_bias="0.839" />
 
     <EditText
-        android:id="@+id/txt_RClientEmail"
+        android:id="@+id/txt_RClientDOB"
         android:layout_width="210dp"
         android:layout_height="45dp"
         android:ems="10"
-        android:gravity="right|center_vertical"
-        android:hint='כתובת דוא"ל'
-        android:inputType="textPersonName|textEmailSubject"
+        android:gravity="left"
+        android:hint="תאריך לידה (dd/mm/yyyy)"
+        android:inputType="date"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintHorizontal_bias="0.925"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.626" />
+        app:layout_constraintVertical_bias="0.763" />
 
-    <EditText
-        android:id="@+id/txt_RClientID"
-        android:layout_width="210dp"
-        android:layout_height="45dp"
-        android:ems="10"
-        android:gravity="right|center_vertical"
-        android:hint="תעודת זהות"
-        android:inputType="number|textPersonName"
-        android:textSize="18sp"
+    <ImageView
+        android:id="@+id/Img_RClientDoc"
+        android:layout_width="198dp"
+        android:layout_height="390dp"
+        android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.549" />
+        app:layout_constraintVertical_bias="0.721"
+        app:srcCompat="@drawable/doctorwoman" />
 
-    <EditText
-        android:id="@+id/txt_RClientFN"
-        android:layout_width="210dp"
-        android:layout_height="45dp"
-        android:ems="10"
-        android:gravity="right|center_vertical"
-        android:hint="שם פרטי"
-        android:inputType="textPersonName"
-        android:textSize="18sp"
+    <Spinner
+        android:id="@+id/spinner_userGender"
+        android:layout_width="124dp"
+        android:layout_height="40dp"
+        android:dropDownWidth="wrap_content"
+        android:gravity="start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintHorizontal_bias="0.944"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.39" />
+        app:layout_constraintVertical_bias="0.687" />
 
     <EditText
         android:id="@+id/txt_RClientLN"
@@ -149,23 +180,23 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintHorizontal_bias="0.925"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.47" />
+        app:layout_constraintVertical_bias="0.454" />
 
     <TextView
         android:id="@+id/txt_RClientWelcome2"
-        android:layout_width="350dp"
+        android:layout_width="370dp"
         android:layout_height="100dp"
         android:text="בעוד צעד קטן תוכלו להנות משירותי הבריאות המקוונים של קופת חולים בריאות בקלות.\nלצורך הצטרפות לשירות, אנא השלימו את הפרטים הבאים:"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.634"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.242" />
+        app:layout_constraintVertical_bias="0.193" />
 
     <TextView
         android:id="@+id/txt_RClientWelcome1"
@@ -175,21 +206,9 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintHorizontal_bias="0.737"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.154" />
-
-    <Spinner
-        android:id="@+id/spinner_userGender"
-        android:layout_width="210dp"
-        android:layout_height="42dp"
-        android:gravity="right|center_vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.925"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.702" />
+        app:layout_constraintVertical_bias="0.121" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

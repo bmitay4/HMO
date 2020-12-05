@@ -7,74 +7,88 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/Button_Drugs"
-        android:layout_width="180dp"
-        android:layout_height="100dp"
+        android:id="@+id/Button_ManagementGoHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:backgroundTint="#87BADD"
-        android:text="ניהול מרשמים"
-        android:textSize="22sp"
+        android:gravity="right|center_vertical"
+        android:text="למסך הבית"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.93"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6" />
+        app:layout_constraintVertical_bias="0.948" />
+
+    <Button
+        android:id="@+id/Button_Drugs"
+        android:layout_width="160dp"
+        android:layout_height="80dp"
+        android:backgroundTint="#87BADD"
+        android:text="ניהול מרשמים"
+        android:textSize="21sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.872"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" />
 
     <Button
         android:id="@+id/Button_Doctors"
-        android:layout_width="180dp"
-        android:layout_height="100dp"
+        android:layout_width="160dp"
+        android:layout_height="80dp"
         android:backgroundTint="#87BADD"
         android:text="ניהול הצוות הרפואי"
-        android:textSize="22sp"
+        android:textSize="21sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.933"
+        app:layout_constraintHorizontal_bias="0.872"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.199" />
 
     <Button
         android:id="@+id/Button_Messages"
-        android:layout_width="180dp"
-        android:layout_height="100dp"
+        android:layout_width="160dp"
+        android:layout_height="80dp"
         android:backgroundTint="#87BADD"
         android:text="ניהול הודעות אישיות"
-        android:textSize="22sp"
+        android:textSize="21sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintHorizontal_bias="0.139"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintVertical_bias="0.356" />
 
     <Button
         android:id="@+id/Button_Queues"
-        android:layout_width="180dp"
-        android:layout_height="100dp"
+        android:layout_width="160dp"
+        android:layout_height="80dp"
         android:backgroundTint="#87BADD"
         android:text="ניהול תורים"
-        android:textSize="22sp"
+        android:textSize="21sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintHorizontal_bias="0.872"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintVertical_bias="0.357" />
 
     <Button
         android:id="@+id/Button_Clients"
-        android:layout_width="180dp"
-        android:layout_height="100dp"
+        android:layout_width="160dp"
+        android:layout_height="80dp"
         android:backgroundTint="#87BADD"
         android:text="ניהול הלקוחות"
-        android:textSize="22sp"
+        android:textSize="21sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintHorizontal_bias="0.139"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.199" />
 
     <ImageView
         android:id="@+id/Img_DocsLogo"

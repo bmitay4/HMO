@@ -30,6 +30,7 @@
         <activity android:name=".ClientLogin" />
         <activity android:name=".MailUserActivity" />
         <activity android:name=".SendMassageActivity" />
+        <activity android:name=".UserAppointment" />
     </application>
 
 </manifest>
