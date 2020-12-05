@@ -19,7 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class mailDocActicity extends AppCompatActivity {
+public class MailDocActicity extends AppCompatActivity {
     private ListView simpleList;
     private String [] msgs;
     private ArrayList <Massages> m;
