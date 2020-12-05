@@ -34,6 +34,7 @@
         <activity android:name=".MailUserActivity" />
         <activity android:name=".SendMassageActivity" />
         <activity android:name=".MailDocActicity" />
+        <activity android:name=".UserAppointment" />
     </application>
 
 </manifest>

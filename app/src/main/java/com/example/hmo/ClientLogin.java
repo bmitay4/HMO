@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class ClientLogin extends AppCompatActivity {
     private TextView clientName,webURL;
     private NewMember member;
-    private Button msg,queue,new_msg_to_doc;
+    private Button msg,queue,new_msg_to_doc, watchQueues;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,10 +59,20 @@ public class ClientLogin extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        watchQueues.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(), UserAppointment.class);
+                intent.putExtra("member",member);
+                startActivity(intent);
+            }
+        });
     }
     private void setValues(){
-        clientName = findViewById(R.id.txt_doctorFullName);
         member = (NewMember) getIntent().getSerializableExtra("member");
+        clientName = findViewById(R.id.txt_doctorFullName);
         clientName.setText(member.getUserFirstName()+" "+member.getUserLastName());
+        watchQueues = findViewById(R.id.button_CMedicalFile);
     }
 }
