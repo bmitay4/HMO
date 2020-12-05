@@ -10,12 +10,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class DoctorLogin extends AppCompatActivity {
     private TextView doctorName;
-    private Button DocSchedules;
+    private Button DocSchedules, DocAppointment;
     private NewDoctor doctor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_doctor);
+
         setValues();
 
         DocSchedules.setOnClickListener(new View.OnClickListener() {
@@ -26,8 +27,14 @@ public class DoctorLogin extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
+        DocAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), DoctorAppointment.class);
+                intent.putExtra("doctor", doctor);
+                startActivity(intent);
+            }
+        });
 
         Button msg = findViewById(R.id.button_notifications);
         Intent intent=new Intent(getApplicationContext(), MailDocActicity.class);
@@ -39,5 +46,6 @@ public class DoctorLogin extends AppCompatActivity {
         doctorName = findViewById(R.id.txt_doctorFullName);
         doctor = (NewDoctor) getIntent().getSerializableExtra("doctor");
         doctorName.setText(" ד\"ר " +doctor.getUserFirstName()+" "+doctor.getUserLastName());
+        DocAppointment = findViewById(R.id.button_queues);
     }
 }
