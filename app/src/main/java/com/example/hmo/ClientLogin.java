@@ -10,25 +10,30 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ClientLogin extends AppCompatActivity {
-    private TextView clientName;
+    private TextView clientName,webURL;
     private NewMember member;
-    private Button sendMsg, bookQueue, watchQueues;
+    private Button msg,queue,new_msg_to_doc;
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_client);
-
         setValues();
 
-        TextView webURL = findViewById(R.id.txt_GoToHealth);
+        // Check my msg's
+        msg = findViewById(R.id.button_notifications);
+        // Set a new appointment
+        queue = findViewById(R.id.button_queues);
+        // URL to health department web site
+        webURL = findViewById(R.id.txt_GoToHealth);
+        // Send a new msg to doctor
+        new_msg_to_doc = findViewById(R.id.button_DocMail);
+
         webURL.setOnClickListener(view -> {
             Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse("https://datadashboard.health.gov.il/COVID-19/general"));
             startActivity(browser);
         });
 
-
-        bookQueue.setOnClickListener(new View.OnClickListener() {
+        queue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), BookAppointment.class);
@@ -37,8 +42,7 @@ public class ClientLogin extends AppCompatActivity {
             }
         });
 
-
-        sendMsg.setOnClickListener(new View.OnClickListener() {
+        msg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getApplicationContext(), MailUserActivity.class);
@@ -47,21 +51,18 @@ public class ClientLogin extends AppCompatActivity {
             }
         });
 
-        watchQueues.setOnClickListener(new View.OnClickListener() {
+        new_msg_to_doc.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(), UserAppointment.class);
+            public void onClick(View view) {
+                Intent intent=new Intent(getApplicationContext(), SendMassageActivity.class);
                 intent.putExtra("member",member);
                 startActivity(intent);
             }
         });
     }
     private void setValues(){
-        member = (NewMember) getIntent().getSerializableExtra("member");
         clientName = findViewById(R.id.txt_doctorFullName);
+        member = (NewMember) getIntent().getSerializableExtra("member");
         clientName.setText(member.getUserFirstName()+" "+member.getUserLastName());
-        sendMsg = findViewById(R.id.button_DocMail);
-        bookQueue = findViewById(R.id.button_queues);
-        watchQueues = findViewById(R.id.button_CMedicalFile);
     }
 }

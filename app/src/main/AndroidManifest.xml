@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HMO">
-        <activity android:name=".ClientsPanel"></activity>
+        <activity android:name=".DocShowMassageActivity"></activity>
+        <activity android:name=".DocSendMassageActivity" />
+        <activity android:name=".DocReplyMassageActivity" />
+        <activity android:name=".ClientsPanel" />
         <activity android:name=".SetAppointment" />
         <activity android:name=".ConfirmAppointment" />
         <activity android:name=".BookAppointment" />
@@ -30,7 +33,7 @@
         <activity android:name=".ClientLogin" />
         <activity android:name=".MailUserActivity" />
         <activity android:name=".SendMassageActivity" />
-        <activity android:name=".UserAppointment" />
+        <activity android:name=".MailDocActicity" />
     </application>
 
 </manifest>

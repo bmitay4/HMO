@@ -19,10 +19,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class ReplyMassageActivity extends AppCompatActivity {
+public class DocReplyMassageActivity extends AppCompatActivity {
     private EditText subject, content;
     private Massages m;
-    private NewMember member;
+    private NewDoctor thisDoc;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class ReplyMassageActivity extends AppCompatActivity {
         decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
         m=(Massages) getIntent().getSerializableExtra("msg");
-        member = (NewMember) getIntent().getSerializableExtra("member");
+        thisDoc = (NewDoctor) getIntent().getSerializableExtra("doctor");
 
         subject = findViewById(R.id.replySubject);
         content = findViewById(R.id.replyContent);
@@ -58,8 +58,8 @@ public class ReplyMassageActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             Toast.makeText(getApplicationContext(),"ההודעה נשלחה" , Toast.LENGTH_LONG).show();
-                            Intent intent=new Intent(getApplicationContext(), ClientLogin.class);
-                            intent.putExtra("member",member);
+                            Intent intent=new Intent(getApplicationContext(), MailDocActicity.class);
+                            intent.putExtra("doctor",thisDoc);
                             startActivity(intent);
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -68,7 +68,7 @@ public class ReplyMassageActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(),"הודעה לא נשלחה" , Toast.LENGTH_LONG).show();
                             Log.d("DB set value problem:","Could not send the msg");
                         }
-                    });
+                    });;
 
                 }
 
