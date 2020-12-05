@@ -14,12 +14,12 @@ public class Massages implements Serializable {
         this.content = content;
     }
     public Massages(){
-        this.fromID = "";
-        this.fromName="";
-        this.toID = "";
-        this.toName="";
-        this.subject = "";
-        this.content = "";
+//        this.fromID = "";
+//        this.fromName="";
+//        this.toID = "";
+//        this.toName="";
+//        this.subject = "";
+//        this.content = "";
     }
     //Getters
     public String getfromID() {
@@ -52,6 +52,7 @@ public class Massages implements Serializable {
     }
     public void setToName(String toName){this.toName=toName;}
     public void setFromName(String fromName){this.fromName=fromName;}
+
 
 }
 

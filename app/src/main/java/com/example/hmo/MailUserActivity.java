@@ -40,10 +40,6 @@ public class MailUserActivity extends Activity {
         simpleList = (ListView) findViewById(R.id.userMails);
         getMassages();
 
-
-//        simpleList = (ListView) findViewById(R.id.userMails);
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MailUserActivity.this, android.R.layout.simple_list_item_1, msgs);
-//        simpleList.setAdapter(arrayAdapter);
         simpleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

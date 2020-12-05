@@ -17,6 +17,7 @@ public class DoctorLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_doctor);
         setValues();
+
         DocSchedules.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -26,8 +27,10 @@ public class DoctorLogin extends AppCompatActivity {
             }
         });
 
-        Button msg = findViewById(R.id.button_DocMail);
-        Intent intent=new Intent(getApplicationContext(), mailDocActicity.class);
+
+
+        Button msg = findViewById(R.id.button_notifications);
+        Intent intent=new Intent(getApplicationContext(), MailDocActicity.class);
         intent.putExtra("doctor",doctor);
         msg.setOnClickListener(v -> startActivity(intent));
     }

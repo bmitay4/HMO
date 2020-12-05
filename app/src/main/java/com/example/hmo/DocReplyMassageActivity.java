@@ -58,7 +58,7 @@ public class DocReplyMassageActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             Toast.makeText(getApplicationContext(),"ההודעה נשלחה" , Toast.LENGTH_LONG).show();
-                            Intent intent=new Intent(getApplicationContext(), mailDocActicity.class);
+                            Intent intent=new Intent(getApplicationContext(), MailDocActicity.class);
                             intent.putExtra("doctor",thisDoc);
                             startActivity(intent);
                         }

@@ -29,7 +29,7 @@ import java.util.ArrayList;
 public class SendMassageActivity extends AppCompatActivity {
     private String[] doctors;
     private EditText subject, content;
-    private String doc,docID,hebrew_pick_doc;
+    private String doc, docID, hebrew_pick_doc;
     private ArrayList<NewDoctor> listingdocs;
     private NewMember member;
     private Spinner spin;
@@ -59,7 +59,8 @@ public class SendMassageActivity extends AppCompatActivity {
         Button sendButton = findViewById(R.id.sendButton);
         sendButton.setOnClickListener(v -> send());
     }
-    public void getDoctor(){
+
+    public void getDoctor() {
 
         fdb = FirebaseDatabase.getInstance();
         refdb = fdb.getReference();
@@ -72,27 +73,31 @@ public class SendMassageActivity extends AppCompatActivity {
                     NewDoctor d = doc.getValue(NewDoctor.class);
                     listingdocs.add(d);
                 }
-                String[] a = new String[listingdocs.size()+1];
+                String[] a = new String[listingdocs.size() + 1];
                 a[0] = hebrew_pick_doc;
                 for (int i = 1; i < a.length; i++) {
-                    a[i] = listingdocs.get(i-1).getUserFirstName()+" "+listingdocs.get(i-1).getUserLastName();
+                    a[i] = listingdocs.get(i - 1).getUserFirstName() + " " + listingdocs.get(i - 1).getUserLastName();
                 }
-                doctors=a;
+                doctors = a;
 //                spin.setOnItemSelectedListener(SendMassageActivity.this);
-                ArrayAdapter aa = new ArrayAdapter(SendMassageActivity.this,android.R.layout.simple_spinner_item,a);
+                ArrayAdapter aa = new ArrayAdapter(SendMassageActivity.this, android.R.layout.simple_spinner_item, a);
                 aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spin.setAdapter(aa);
+
                 spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        Toast.makeText(getApplicationContext(),doctors[i] , Toast.LENGTH_LONG).show();
-                        doc=doctors[i];
-                        docID=listingdocs.get(i).getUserID();
+                        int j = i + 1;
+                        Toast.makeText(getApplicationContext(), doctors[i], Toast.LENGTH_LONG).show();
+                        doc = doctors[i];
+                        if (!doc.equals(hebrew_pick_doc)) {
+                            docID = listingdocs.get(i - 1).getUserID();
+                        }
                     }
 
                     @Override
                     public void onNothingSelected(AdapterView<?> adapterView) {
-                        Toast.makeText(getApplicationContext(),hebrew_pick_doc , Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), hebrew_pick_doc, Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -107,7 +112,7 @@ public class SendMassageActivity extends AppCompatActivity {
 
     }
 
-    private void send(){
+    private void send() {
         String localsubject = subject.getText().toString();
         String localcontent = content.getText().toString();
 
@@ -116,25 +121,25 @@ public class SendMassageActivity extends AppCompatActivity {
         else if (localcontent.isEmpty())
             content.setError("שדה חובה");
         else if (docID.isEmpty() || doc.equals(hebrew_pick_doc))
-            Toast.makeText(getApplicationContext(),"אנא בחר רופא" , Toast.LENGTH_LONG).show();
-        else{
+            Toast.makeText(getApplicationContext(), "אנא בחר רופא", Toast.LENGTH_LONG).show();
+        else {
             FirebaseDatabase.getInstance().getReference("Massage").child(docID).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    Massages m=new Massages(localsubject,localcontent,member.getUserID(),member.getUserFirstName()+" "+member.getUserLastName(),docID,doc);
+                    Massages m = new Massages(localsubject, localcontent, member.getUserID(), member.getUserFirstName() + " " + member.getUserLastName(), docID, doc);
                     FirebaseDatabase.getInstance().getReference("Massage").child(docID).setValue(m).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            Toast.makeText(getApplicationContext(),"ההודעה נשלחה" , Toast.LENGTH_LONG).show();
-                            Intent intent=new Intent(getApplicationContext(), ClientLogin.class);
-                            intent.putExtra("member",member);
+                            Toast.makeText(getApplicationContext(), "ההודעה נשלחה", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getApplicationContext(), ClientLogin.class);
+                            intent.putExtra("member", member);
                             startActivity(intent);
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getApplicationContext(),"ההודעה לא נשלחה" , Toast.LENGTH_LONG).show();
-                            Log.d("Could not set value:","sending messge to doctor failed "+ e);
+                            Toast.makeText(getApplicationContext(), "ההודעה לא נשלחה", Toast.LENGTH_LONG).show();
+                            Log.d("Could not set value:", "sending messge to doctor failed " + e);
                         }
                     });
 
@@ -142,14 +147,13 @@ public class SendMassageActivity extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(getApplicationContext(),"בעיה עם השרת" , Toast.LENGTH_LONG).show();
-                    Log.d("Could not connect:","problem with the db "+error);
+                    Toast.makeText(getApplicationContext(), "בעיה עם השרת", Toast.LENGTH_LONG).show();
+                    Log.d("Could not connect:", "problem with the db " + error);
                 }
             });
         }
 
     }
-
 
 
 }
