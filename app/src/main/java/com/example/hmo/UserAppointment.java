@@ -79,6 +79,7 @@ public class UserAppointment extends AppCompatActivity {
         refdb = fdb.getReference();
         userInfo = findViewById(R.id.txt_userAppointmentInfo2);
         userAppointment = findViewById(R.id.list_UserAppointmens);
+        userInfo.setText("");
         goHome = findViewById(R.id.button_userAppointmentGoHome2);
     }
 }
