@@ -10,17 +10,16 @@
 
     <TextView
         android:id="@+id/txt_userAppointmentInfo2"
-        android:layout_width="378dp"
-        android:layout_height="160dp"
+        android:layout_width="363dp"
+        android:layout_height="156dp"
         android:gravity="right|center_vertical"
         android:text=" תור קיים..פרטי תור קיים..פרטי תור קיים.."
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.532" />
+        app:layout_constraintVertical_bias="0.575" />
 
     <Button
         android:id="@+id/button_userAppointmentGoHome2"
@@ -78,13 +77,13 @@
 
     <ListView
         android:id="@+id/list_UserAppointmens"
-        android:layout_width="380dp"
-        android:layout_height="102dp"
+        android:layout_width="355dp"
+        android:layout_height="95dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintHorizontal_bias="0.553"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.302" />
+        app:layout_constraintVertical_bias="0.328" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

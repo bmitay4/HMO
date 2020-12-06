@@ -55,6 +55,14 @@ public class Appointment implements Serializable {
                 "ת.ז. " + m.getUserID() + "\n" +
                 "הרופא המטפל: " + docName + " " + docLastName;
     }
+    @NotNull
+    public String toString() {
+        return "פרטי התור שנקבע \n" +
+                "בתאריך " + date + ", בשעה " + time + "\n" +
+                "נקבע תור עבור " + userName + " " + userLastName + "\n" +
+                "ת.ז. " + userID + "\n" +
+                "הרופא המטפל: " + docName + " " + docLastName;
+    }
 
     public String getDate() {
         return date;
