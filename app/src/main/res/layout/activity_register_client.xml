@@ -39,7 +39,7 @@
 
     <Button
         android:id="@+id/Button_RClientBackToHome"
-        android:layout_width="wrap_content"
+        android:layout_width="182dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#87BADD"
         android:text="חזרה למסך הבית"
@@ -112,22 +112,6 @@
         app:layout_constraintVertical_bias="0.61" />
 
     <EditText
-        android:id="@+id/txt_RClientPass"
-        android:layout_width="210dp"
-        android:layout_height="45dp"
-        android:ems="10"
-        android:gravity="right|center_vertical"
-        android:hint="סיסמא"
-        android:inputType="numberPassword"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.925"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.839" />
-
-    <EditText
         android:id="@+id/txt_RClientDOB"
         android:layout_width="210dp"
         android:layout_height="45dp"
@@ -142,6 +126,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.763" />
+
+    <EditText
+        android:id="@+id/txt_RClientPass"
+        android:layout_width="210dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:gravity="right|center_vertical"
+        android:hint="סיסמא"
+        android:inputType="numberPassword"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.925"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.839" />
 
     <Spinner
         android:id="@+id/spinner_userGender"
@@ -200,8 +200,8 @@
 
     <ImageView
         android:id="@+id/Img_RClientDoc"
-        android:layout_width="168dp"
-        android:layout_height="366dp"
+        android:layout_width="148dp"
+        android:layout_height="344dp"
         android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
