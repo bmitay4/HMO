@@ -1,6 +1,7 @@
 package com.example.hmo;
 
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DocSendMassageActivity extends AppCompatActivity {
     private String[] users;
@@ -112,7 +114,13 @@ public class DocSendMassageActivity extends AppCompatActivity {
             refdb.child("Massage").child(userID).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    Massages m = new Massages(localsubject, localcontent, thisDoc.getUserID(), thisDoc.getUserFirstName() + " " + thisDoc.getUserLastName(), userID, userName);
+                    SimpleDateFormat formatter_date = new SimpleDateFormat("dd/MM/yyyy");
+                    SimpleDateFormat formatter_time = new SimpleDateFormat("HH:mm:ss");
+                    Date date = new Date();
+                    String date_string = formatter_date.format(date);
+                    String time_string = formatter_time.format(date);
+
+                    Massages m = new Massages(localsubject, localcontent, thisDoc.getUserID(), thisDoc.getUserFirstName() + " " + thisDoc.getUserLastName(), userID, userName,date_string,time_string,false);
                     FirebaseDatabase.getInstance().getReference("Massage").child(userID).setValue(m).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

@@ -1,6 +1,7 @@
 package com.example.hmo;
 
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MailDocActicity extends AppCompatActivity {
 
@@ -46,8 +48,9 @@ public class MailDocActicity extends AppCompatActivity {
         simpleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), ShowMassageActivity.class);
+                Intent intent = new Intent(getApplicationContext(), DocShowMassageActivity.class);
                 intent.putExtra("msg",m.get(position));
+                intent.putExtra("doctor",doctor);
                 startActivity(intent);
             }
         });
@@ -60,13 +63,21 @@ public class MailDocActicity extends AppCompatActivity {
 
         fdb = FirebaseDatabase.getInstance();
         refdb = fdb.getReference();
+        m = new ArrayList<Massages>();
+
         refdb.child("Massage").child(doctor.getUserID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                m = new ArrayList<Massages>();
-                for (DataSnapshot mes : snapshot.getChildren()) {
-                    Massages temp = mes.getValue(Massages.class);
-                    m.add(temp);
+
+                for (DataSnapshot dates : snapshot.getChildren()) {
+                    for(DataSnapshot user_id : dates.getChildren()){
+                        for(DataSnapshot times : user_id.getChildren()){
+                            System.out.println(times.getValue().toString());
+                            Massages temp = times.getValue(Massages.class);
+                            m.add(temp);
+                        }
+                    }
+
                 }
                 String[] a = new String[m.size()];
                 for (int i = 0; i < a.length; i++) {

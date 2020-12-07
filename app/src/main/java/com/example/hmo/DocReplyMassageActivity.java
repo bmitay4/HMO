@@ -1,6 +1,7 @@
 package com.example.hmo;
 
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,11 +20,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Date;
+
 public class DocReplyMassageActivity extends AppCompatActivity {
     private EditText subject, content;
     private Massages m;
     private NewDoctor thisDoc;
-
+    private Button reply;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +39,13 @@ public class DocReplyMassageActivity extends AppCompatActivity {
 
         subject = findViewById(R.id.replySubject);
         content = findViewById(R.id.replyContent);
-        Button replyButton = findViewById(R.id.sendButton);
-        replyButton.setOnClickListener(v -> reply());
+        reply = findViewById(R.id.replybutton);
+        reply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                reply();
+            }
+        });
     }
 
 
@@ -50,32 +58,26 @@ public class DocReplyMassageActivity extends AppCompatActivity {
         else if (localcontent.isEmpty())
             content.setError("שדה חובה");
         else{
-            FirebaseDatabase.getInstance().getReference("Massage").child(m.getfromID()).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    Massages newM=new Massages(localsubject,localcontent,m.getToID(),m.getToName(),m.getfromID(),m.getFromName());
-                    FirebaseDatabase.getInstance().getReference("Massage").child(m.getfromID()).setValue(newM).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            Toast.makeText(getApplicationContext(),"ההודעה נשלחה" , Toast.LENGTH_LONG).show();
-                            Intent intent=new Intent(getApplicationContext(), MailDocActicity.class);
-                            intent.putExtra("doctor",thisDoc);
-                            startActivity(intent);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getApplicationContext(),"הודעה לא נשלחה" , Toast.LENGTH_LONG).show();
-                            Log.d("DB set value problem:","Could not send the msg");
-                        }
-                    });;
+            SimpleDateFormat formatter_date = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat formatter_time = new SimpleDateFormat("HH:mm:ss");
+            Date date = new Date();
+            String date_string = formatter_date.format(date);
+            String time_string = formatter_time.format(date);
 
+            Massages newM=new Massages(localsubject,localcontent,m.getToID(),m.getToName(),m.getFromID(),m.getFromName(),date_string,time_string,false);
+            FirebaseDatabase.getInstance().getReference("Massage").child(m.getFromID()).setValue(newM).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(getApplicationContext(),"ההודעה נשלחה" , Toast.LENGTH_LONG).show();
+                    Intent intent=new Intent(getApplicationContext(), MailDocActicity.class);
+                    intent.putExtra("doctor",thisDoc);
+                    startActivity(intent);
                 }
-
+            }).addOnFailureListener(new OnFailureListener() {
                 @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(getApplicationContext(),"בעיה בהתחברות לשרת" , Toast.LENGTH_LONG).show();
-                    Log.d("DB problem:","Could not connect to the server");
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(),"הודעה לא נשלחה" , Toast.LENGTH_LONG).show();
+                    Log.d("DB set value problem:","Could not send the msg");
                 }
             });
         }

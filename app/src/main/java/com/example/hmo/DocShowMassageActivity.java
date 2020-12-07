@@ -8,16 +8,25 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class DocShowMassageActivity extends AppCompatActivity {
     private TextView subjest, content,from;
-    private Massages m=(Massages) getIntent().getSerializableExtra("msg");
-    private NewDoctor doctor= (NewDoctor) getIntent().getSerializableExtra("member");
+    private Massages m;
+    private NewDoctor doctor;
+    private FirebaseDatabase fr;
+    private DatabaseReference refdb;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_massage);
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+
+        m=(Massages) getIntent().getSerializableExtra("msg");
+        doctor= (NewDoctor) getIntent().getSerializableExtra("doctor");
+        fr = FirebaseDatabase.getInstance();
+        refdb = fr.getReference();
 
         subjest = findViewById(R.id.subjectFrom);
         subjest.setText("נושא:"+m.getSubject());
@@ -25,6 +34,9 @@ public class DocShowMassageActivity extends AppCompatActivity {
         content.setText(m.getContent());
         from = findViewById(R.id.sendFrom);
         from.setText("הודעה מ"+m.getFromName());
+
+        set_read_msg();
+
         Button replyButton = findViewById(R.id.reply);
         replyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +47,12 @@ public class DocShowMassageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+    }
+
+    private void set_read_msg() {
+
+        refdb.child(doctor.getUserID()).child(m.getDate()).child(m.getFromID()).child(m.getTime()).child("read").setValue(true);
 
     }
 }

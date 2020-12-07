@@ -2,6 +2,7 @@ package com.example.hmo;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class SendMassageActivity extends AppCompatActivity {
     private String[] doctors;
@@ -120,35 +122,30 @@ public class SendMassageActivity extends AppCompatActivity {
             subject.setError("שדה חובה");
         else if (localcontent.isEmpty())
             content.setError("שדה חובה");
-        else if (docID.isEmpty() || doc.equals(hebrew_pick_doc))
+        else if (doc.equals(hebrew_pick_doc) || docID.isEmpty() )
             Toast.makeText(getApplicationContext(), "אנא בחר רופא", Toast.LENGTH_LONG).show();
         else {
-            FirebaseDatabase.getInstance().getReference("Massage").child(docID).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    Massages m = new Massages(localsubject, localcontent, member.getUserID(), member.getUserFirstName() + " " + member.getUserLastName(), docID, doc);
-                    FirebaseDatabase.getInstance().getReference("Massage").child(docID).setValue(m).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            Toast.makeText(getApplicationContext(), "ההודעה נשלחה", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(getApplicationContext(), ClientLogin.class);
-                            intent.putExtra("member", member);
-                            startActivity(intent);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getApplicationContext(), "ההודעה לא נשלחה", Toast.LENGTH_LONG).show();
-                            Log.d("Could not set value:", "sending messge to doctor failed " + e);
-                        }
-                    });
 
+            SimpleDateFormat formatter_date = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat formatter_time = new SimpleDateFormat("HH:mm:ss");
+            Date date = new Date();
+            String date_string = formatter_date.format(date).replace("/","");
+            String time_string = formatter_time.format(date).replace(":","");
+
+            Massages m = new Massages(localsubject, localcontent, member.getUserID(), member.getUserFirstName() + " " + member.getUserLastName(), docID, doc, date_string,time_string,false);
+            FirebaseDatabase.getInstance().getReference("Massage").child(docID).child(date_string).child(member.getUserID()).child(time_string).setValue(m).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(getApplicationContext(), "ההודעה נשלחה", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(), ClientLogin.class);
+                    intent.putExtra("member", member);
+                    startActivity(intent);
                 }
-
+            }).addOnFailureListener(new OnFailureListener() {
                 @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(getApplicationContext(), "בעיה עם השרת", Toast.LENGTH_LONG).show();
-                    Log.d("Could not connect:", "problem with the db " + error);
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), "ההודעה לא נשלחה", Toast.LENGTH_LONG).show();
+                    Log.d("Could not set value:", "sending messge to doctor failed " + e);
                 }
             });
         }

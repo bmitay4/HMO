@@ -6,8 +6,27 @@
 
     <TextView android:layout_height="406dp" android:layout_width="253dp" app:layout_constraintVertical_bias="0.882" app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.493" app:layout_constraintEnd_toEndOf="parent" android:id="@+id/contentFrom" app:layout_constraintTop_toBottomOf="@+id/subjectFrom" app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="112dp"/>
 
-    <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/reply" tools:layout_editor_absoluteY="642dp" tools:layout_editor_absoluteX="39dp" android:text="השב"/>
+    <Button
+        android:id="@+id/reply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="השב"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95" />
 
-    <TextView android:layout_height="44dp" android:layout_width="253dp" app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.493" app:layout_constraintEnd_toEndOf="parent" android:id="@+id/subjectFrom" tools:layout_editor_absoluteY="132dp"/>
+    <TextView
+        android:id="@+id/subjectFrom"
+        android:layout_width="253dp"
+        android:layout_height="44dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.189" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

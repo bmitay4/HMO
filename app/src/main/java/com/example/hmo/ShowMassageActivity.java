@@ -19,11 +19,10 @@ public class ShowMassageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_massage);
-        decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
         member = (NewMember)getIntent().getSerializableExtra("member");
         msg =(Massages) getIntent().getSerializableExtra("msg");
+        msg.setRead(true);
         subjest = findViewById(R.id.subjectFrom);
         subjest.setText("נושא:"+msg.getSubject());
 
