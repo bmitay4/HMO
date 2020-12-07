@@ -2,14 +2,21 @@ package com.example.hmo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class DocShowMassageActivity extends AppCompatActivity {
     private TextView subjest, content,from;
@@ -17,7 +24,6 @@ public class DocShowMassageActivity extends AppCompatActivity {
     private NewDoctor doctor;
     private FirebaseDatabase fr;
     private DatabaseReference refdb;
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +58,7 @@ public class DocShowMassageActivity extends AppCompatActivity {
 
     private void set_read_msg() {
 
-        refdb.child(doctor.getUserID()).child(m.getDate()).child(m.getFromID()).child(m.getTime()).child("read").setValue(true);
+     refdb.child("Massage").child(doctor.getUserID()).child(m.getDate()).child(m.getFromID()).child(m.getTime()).child("read").setValue(true);
 
     }
 }

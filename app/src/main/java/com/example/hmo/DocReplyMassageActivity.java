@@ -31,14 +31,13 @@ public class DocReplyMassageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reply);
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
         m=(Massages) getIntent().getSerializableExtra("msg");
         thisDoc = (NewDoctor) getIntent().getSerializableExtra("doctor");
 
         subject = findViewById(R.id.replySubject);
         content = findViewById(R.id.replyContent);
+        subject.setText("reply:"+m.getSubject());
         reply = findViewById(R.id.replybutton);
         reply.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,11 +60,11 @@ public class DocReplyMassageActivity extends AppCompatActivity {
             SimpleDateFormat formatter_date = new SimpleDateFormat("dd/MM/yyyy");
             SimpleDateFormat formatter_time = new SimpleDateFormat("HH:mm:ss");
             Date date = new Date();
-            String date_string = formatter_date.format(date);
-            String time_string = formatter_time.format(date);
+            String date_string = formatter_date.format(date).replace("/","");
+            String time_string = formatter_time.format(date).replace(":","");
 
             Massages newM=new Massages(localsubject,localcontent,m.getToID(),m.getToName(),m.getFromID(),m.getFromName(),date_string,time_string,false);
-            FirebaseDatabase.getInstance().getReference("Massage").child(m.getFromID()).setValue(newM).addOnCompleteListener(new OnCompleteListener<Void>() {
+            FirebaseDatabase.getInstance().getReference("Massage").child(m.getFromID()).child(date_string).child(thisDoc.getUserID()).child(time_string).setValue(newM).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     Toast.makeText(getApplicationContext(),"ההודעה נשלחה" , Toast.LENGTH_LONG).show();
