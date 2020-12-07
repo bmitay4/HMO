@@ -85,11 +85,25 @@ public class BookAppointment extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dayOfMonth) {
                 if (docid != null) {
-                    date = dayOfMonth + "." + (month + 1) + "." + year;
-                    String d = date.replace(".", "");
 
+                    String int_day_tostring = "" + dayOfMonth;
+                    String int_month_tostring = ""+ (month+1);
+
+                    if (int_day_tostring.length() < 2) {
+                        date = "0"+dayOfMonth + ".";
+
+                    }else{
+                        date = dayOfMonth + ".";
+                    }
+                    if (int_month_tostring.length()<2){
+                        date = date +"0"+(month+1)+"."+year;
+                    }
+                    else{
+                        date = date +(month+1)+"."+year;
+                    }
+                    String date2db = date.replace(".", "");
                     // Pick the right branch Events -> DocID -> Date
-                    DatabaseReference eventrf = refdb.child("Appointments").child(docid).child(d);
+                    DatabaseReference eventrf = refdb.child("Appointments").child(docid).child(date2db);
 
                     // Gets all the available appointments
                     eventrf.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -155,8 +169,7 @@ public class BookAppointment extends AppCompatActivity {
             i.putExtra("user", user);
             i.putExtra("picked_apt", picked_apt);
             startActivity(i);
-        }
-        else
+        } else
             Toast.makeText(this, "לא נבחר רופא או מועד לתור", Toast.LENGTH_LONG).show();
 
     }

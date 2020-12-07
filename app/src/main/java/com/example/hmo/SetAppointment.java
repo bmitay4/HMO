@@ -39,7 +39,20 @@ public class SetAppointment extends AppCompatActivity {
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dayOfMonth) {
-                date = dayOfMonth + "." + (month + 1) + "." + year;
+                String int_day_tostring = "" + dayOfMonth;
+                String int_month_tostring = "" + (month + 1);
+
+                if (int_day_tostring.length() < 2) {
+                    date = "0" + dayOfMonth + ".";
+
+                } else {
+                    date = dayOfMonth + ".";
+                }
+                if (int_month_tostring.length() < 2) {
+                    date = date + "0" + (month + 1) + "." + year;
+                } else {
+                    date = date + (month + 1) + "." + year;
+                }
                 dbdate = date.replace(".", "");
             }
         });
