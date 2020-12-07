@@ -34,8 +34,6 @@ public class MailUserActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mail_user);
 
-        decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
         member = (NewMember) getIntent().getSerializableExtra("member");
         simpleList = (ListView) findViewById(R.id.userMails);
         getMassages();
@@ -56,17 +54,24 @@ public class MailUserActivity extends Activity {
 
         fdb = FirebaseDatabase.getInstance();
         refdb = fdb.getReference();
-        refdb.child("Massages").child(member.getUserID()).addListenerForSingleValueEvent(new ValueEventListener() {
+        msg_list = new ArrayList<Massages>();
+        refdb.child("Massage").child(member.getUserID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                msg_list = new ArrayList<Massages>();
-                for (DataSnapshot mes : snapshot.getChildren()) {
-                    Massages temp = mes.getValue(Massages.class);
-                    msg_list.add(temp);
+
+                for (DataSnapshot dates : snapshot.getChildren()) {
+                    for(DataSnapshot docid : dates.getChildren()){
+                        for(DataSnapshot times : docid.getChildren()){
+                            System.out.println(times.getValue().toString());
+                            Massages temp = times.getValue(Massages.class);
+                            msg_list.add(temp);
+                        }
+                    }
+
                 }
                 String[] a = new String[msg_list.size()];
                 for (int i = 0; i < a.length; i++) {
-                    a[i] = msg_list.get(i).getFromName()+"הודעה חדשה מ";
+                    a[i] = "הודעה חדשה מ"+msg_list.get(i).getFromName();
                 }
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MailUserActivity.this, android.R.layout.simple_list_item_1, a);
                 simpleList.setAdapter(arrayAdapter);

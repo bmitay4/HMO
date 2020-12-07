@@ -35,16 +35,11 @@ public class MailDocActicity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mail_doc);
-        decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
         doctor = (NewDoctor) getIntent().getSerializableExtra("doctor");
         simpleList = (ListView) findViewById(R.id.allMsgs);
         getMassages();
 
-//        simpleList = (ListView) findViewById(R.id.allMsgs);
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, msgs);
-//        simpleList.setAdapter(arrayAdapter);
         simpleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -54,9 +49,6 @@ public class MailDocActicity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-//        Button newMassage = findViewById(R.id.newMassage);
-//        newMassage.setOnClickListener(v->startActivity(new Intent(getApplicationContext(), SendMassageActivity.class)));
 
     }
     private void getMassages() {
