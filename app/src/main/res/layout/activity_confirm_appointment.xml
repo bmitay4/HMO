@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_alignParentEnd="true"
     android:layoutDirection="ltr"
-    tools:context=".ConfirmAppointment">
+    tools:context=".Appointment_User.ConfirmAppointment">
 
     <Button
         android:id="@+id/Button_ConfirmConf"

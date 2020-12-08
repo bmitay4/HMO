@@ -11,33 +11,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HMO">
-        <activity android:name=".DoctorAppointment"></activity>
-        <activity android:name=".DocShowMassageActivity" />
-        <activity android:name=".DocSendMassageActivity" />
-        <activity android:name=".DocReplyMassageActivity" />
-        <activity android:name=".ClientsPanel" />
-        <activity android:name=".SetAppointment" />
-        <activity android:name=".ConfirmAppointment" />
-        <activity android:name=".BookAppointment" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Appointment_Doctors.DoctorAppointment"></activity>
+        <activity android:name=".Message_Doctors.DocShowMessageActivity" />
+        <activity android:name=".Message_Doctors.DocSendMessageActivity" />
+        <activity android:name=".Message_Doctors.DocReplyMessageActivity" />
+        <activity android:name=".Panels_Screens.ClientsPanel" />
+        <activity android:name=".Appointment_Doctors.SetAppointment" />
+        <activity android:name=".Appointment_User.ConfirmAppointment" />
+        <activity android:name=".Appointment_User.BookAppointment" />
+        <activity android:name=".Login_Screens.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Registration" />
-        <activity android:name=".MainLogin" />
-        <activity android:name=".Management" />
-        <activity android:name=".DoctorsPanel" />
-        <activity android:name=".DoctorLogin" />
-        <activity android:name=".ClientLogin" />
-        <activity android:name=".MailUserActivity" />
-        <activity android:name=".SendMassageActivity" />
-        <activity android:name=".MailDocActicity" />
-        <activity android:name=".UserAppointment" />
-        <activity android:name=".ShowMassageActivity" />
-        <activity android:name=".ReplyMassageActivity" />
+        <activity android:name=".Registration.Registration" />
+        <activity android:name=".Login_Screens.MainLogin" />
+        <activity android:name=".Management.Management" />
+        <activity android:name=".Panels_Screens.DoctorsPanel" />
+        <activity android:name=".Login_Screens.DoctorLogin" />
+        <activity android:name=".Login_Screens.ClientLogin" />
+        <activity android:name=".Message_Users.MailUserActivity" />
+        <activity android:name=".Message_Users.SendMassageActivity" />
+        <activity android:name=".Message_Doctors.MailDocActicity" />
+        <activity android:name=".Appointment_User.UserAppointments" />
+        <activity android:name=".Message_Users.ShowMassageActivity" />
+        <activity android:name=".Message_Users.ReplyMassageActivity" />
     </application>
 
 </manifest>

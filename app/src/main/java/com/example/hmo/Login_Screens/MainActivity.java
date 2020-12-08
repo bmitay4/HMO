@@ -1,4 +1,4 @@
-package com.example.hmo;
+package com.example.hmo.Login_Screens;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.hmo.General_Objects.NewDoctor;
+import com.example.hmo.General_Objects.NewMember;
+import com.example.hmo.Management.Management;
+import com.example.hmo.OnGetDataListener;
+import com.example.hmo.R;
+import com.example.hmo.Registration.Registration;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         setValues();
 
         teamButton.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), Management.class)));
-//        forgotPass.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), RegistrationDoctors.class)));
         registerButton.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), Registration.class)));
         loginButton.setOnClickListener(v -> login());
     }

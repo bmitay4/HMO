@@ -1,6 +1,5 @@
-package com.example.hmo;
+package com.example.hmo.Message_Doctors;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +8,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.hmo.General_Objects.Message;
+import com.example.hmo.General_Objects.NewDoctor;
+import com.example.hmo.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,61 +21,61 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MailUserActivity extends Activity {
+public class MailDocActicity extends AppCompatActivity {
 
     private ListView simpleList;
     private View decorView;
     private String [] msgs;
-    private ArrayList<Message> msg_list;
-    private NewMember member;
-    private FirebaseDatabase fdb;
-    private DatabaseReference refdb;
+    private ArrayList <Message> m;
+    private NewDoctor doctor;
+    FirebaseDatabase fdb;
+    DatabaseReference refdb;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mail_user);
+        setContentView(R.layout.activity_mail_doc);
 
-        member = (NewMember) getIntent().getSerializableExtra("member");
-        simpleList = (ListView) findViewById(R.id.userMails);
+        doctor = (NewDoctor) getIntent().getSerializableExtra("doctor");
+        simpleList = (ListView) findViewById(R.id.allMsgs);
         getMassages();
 
         simpleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), ShowMassageActivity.class);
-                intent.putExtra("msg",msg_list.get(position));
-                intent.putExtra("member",member);
+                Intent intent = new Intent(getApplicationContext(), DocShowMessageActivity.class);
+                intent.putExtra("msg",m.get(position));
+                intent.putExtra("doctor",doctor);
                 startActivity(intent);
             }
         });
 
     }
-
     private void getMassages() {
 
         fdb = FirebaseDatabase.getInstance();
         refdb = fdb.getReference();
-        msg_list = new ArrayList<Message>();
-        refdb.child("Massage").child(member.getUserID()).addListenerForSingleValueEvent(new ValueEventListener() {
+        m = new ArrayList<Message>();
+
+        refdb.child("Message").child(doctor.getUserID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 for (DataSnapshot dates : snapshot.getChildren()) {
-                    for(DataSnapshot docid : dates.getChildren()){
-                        for(DataSnapshot times : docid.getChildren()){
+                    for(DataSnapshot user_id : dates.getChildren()){
+                        for(DataSnapshot times : user_id.getChildren()){
                             System.out.println(times.getValue().toString());
                             Message temp = times.getValue(Message.class);
-                            msg_list.add(temp);
+                            m.add(temp);
                         }
                     }
 
                 }
-                String[] a = new String[msg_list.size()];
+                String[] a = new String[m.size()];
                 for (int i = 0; i < a.length; i++) {
-                    a[i] = "הודעה חדשה מ"+msg_list.get(i).getFromName();
+                    a[i] = "הודעה חדשה מ"+m.get(i).getFromName();
                 }
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MailUserActivity.this, android.R.layout.simple_list_item_1, a);
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MailDocActicity.this, android.R.layout.simple_list_item_1, a);
                 simpleList.setAdapter(arrayAdapter);
             }
 
@@ -84,5 +87,6 @@ public class MailUserActivity extends Activity {
 
     }
 }
+
 
 

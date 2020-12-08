@@ -1,4 +1,4 @@
-package com.example.hmo;
+package com.example.hmo.Login_Screens;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.hmo.Appointment_Doctors.DoctorAppointment;
+import com.example.hmo.General_Objects.NewDoctor;
+import com.example.hmo.Message_Doctors.MailDocActicity;
+import com.example.hmo.R;
+import com.example.hmo.Appointment_Doctors.SetAppointment;
 
 public class DoctorLogin extends AppCompatActivity {
     private TextView doctorName;

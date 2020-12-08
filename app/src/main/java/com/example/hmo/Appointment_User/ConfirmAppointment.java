@@ -1,17 +1,18 @@
-package com.example.hmo;
+package com.example.hmo.Appointment_User;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.hmo.Login_Screens.ClientLogin;
+import com.example.hmo.General_Objects.Appointment;
+import com.example.hmo.General_Objects.NewMember;
+import com.example.hmo.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 

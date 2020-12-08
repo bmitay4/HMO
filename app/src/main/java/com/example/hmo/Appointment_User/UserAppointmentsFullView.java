@@ -1,8 +1,10 @@
-package com.example.hmo;
+package com.example.hmo.Appointment_User;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.hmo.R;
 
 public class UserAppointmentsFullView extends AppCompatActivity {
 

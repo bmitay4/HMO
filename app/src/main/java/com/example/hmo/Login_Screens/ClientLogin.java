@@ -1,4 +1,4 @@
-package com.example.hmo;
+package com.example.hmo.Login_Screens;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -8,6 +8,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.hmo.General_Objects.NewMember;
+import com.example.hmo.Message_Users.MailUserActivity;
+import com.example.hmo.R;
+import com.example.hmo.Message_Users.SendMassageActivity;
+import com.example.hmo.Appointment_User.UserAppointments;
+import com.example.hmo.Appointment_User.BookAppointment;
 
 public class ClientLogin extends AppCompatActivity {
     private TextView clientName,webURL;
@@ -63,7 +70,7 @@ public class ClientLogin extends AppCompatActivity {
         watchQueues.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(), UserAppointment.class);
+                Intent intent=new Intent(getApplicationContext(), UserAppointments.class);
                 intent.putExtra("member",member);
                 startActivity(intent);
             }

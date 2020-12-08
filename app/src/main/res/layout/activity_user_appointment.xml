@@ -6,7 +6,7 @@
     android:layout_alignParentEnd="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserAppointment">
+    tools:context=".Appointment_User.UserAppointments">
 
     <TextView
         android:id="@+id/txt_userAppointmentInfo2"

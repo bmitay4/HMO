@@ -1,4 +1,4 @@
-package com.example.hmo;
+package com.example.hmo.General_Objects;
 
 import org.jetbrains.annotations.NotNull;
 

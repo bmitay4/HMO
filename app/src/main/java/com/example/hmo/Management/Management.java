@@ -1,10 +1,14 @@
-package com.example.hmo;
+package com.example.hmo.Management;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.hmo.Panels_Screens.ClientsPanel;
+import com.example.hmo.Panels_Screens.DoctorsPanel;
+import com.example.hmo.R;
 
 public class Management extends AppCompatActivity {
     Button Doctors_Panel, Clients_Panel, Queues_Panel, Messages_Panel, Drugs_Panel, goBack;

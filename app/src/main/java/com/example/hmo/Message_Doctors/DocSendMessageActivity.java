@@ -1,4 +1,4 @@
-package com.example.hmo;
+package com.example.hmo.Message_Doctors;
 
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
@@ -15,6 +15,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.hmo.General_Objects.Message;
+import com.example.hmo.General_Objects.NewDoctor;
+import com.example.hmo.General_Objects.NewMember;
+import com.example.hmo.Login_Screens.DoctorLogin;
+import com.example.hmo.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -27,7 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class DocSendMassageActivity extends AppCompatActivity {
+public class DocSendMessageActivity extends AppCompatActivity {
     private String[] users;
     private EditText subject, content;
     private String userName, userID, hebrew_pick_user;
@@ -72,7 +77,7 @@ public class DocSendMassageActivity extends AppCompatActivity {
                     a[i] = listinguser.get(i - 1).getUserFirstName() + " " + listinguser.get(i - 1).getUserLastName();
                 }
                 users = a;
-                ArrayAdapter aa = new ArrayAdapter(DocSendMassageActivity.this, android.R.layout.simple_spinner_item, a);
+                ArrayAdapter aa = new ArrayAdapter(DocSendMessageActivity.this, android.R.layout.simple_spinner_item, a);
                 aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spin.setAdapter(aa);
                 spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -108,7 +113,7 @@ public class DocSendMassageActivity extends AppCompatActivity {
             subject.setError("שדה חובה");
         else if (localcontent.isEmpty())
             content.setError("שדה חובה");
-        else if (userID.isEmpty() || userName.equals(hebrew_pick_user))
+        else if (userName.equals(hebrew_pick_user) || userID.isEmpty() )
             Toast.makeText(getApplicationContext(), "אנא בחר מטופל", Toast.LENGTH_LONG).show();
         else {
             SimpleDateFormat formatter_date = new SimpleDateFormat("dd/MM/yyyy");

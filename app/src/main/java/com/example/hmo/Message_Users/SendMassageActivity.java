@@ -1,4 +1,4 @@
-package com.example.hmo;
+package com.example.hmo.Message_Users;
 
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
@@ -15,6 +15,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.hmo.General_Objects.Message;
+import com.example.hmo.General_Objects.NewDoctor;
+import com.example.hmo.General_Objects.NewMember;
+import com.example.hmo.Login_Screens.ClientLogin;
+import com.example.hmo.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;

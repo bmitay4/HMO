@@ -7,7 +7,7 @@
     android:layout_alignParentEnd="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DoctorsPanel">
+    tools:context=".Panels_Screens.DoctorsPanel">
 
     <Button
         android:id="@+id/Button_MDocsGoToHome"

@@ -1,4 +1,4 @@
-package com.example.hmo;
+package com.example.hmo.Message_Users;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.hmo.General_Objects.Message;
+import com.example.hmo.General_Objects.NewMember;
+import com.example.hmo.R;
 
 
 public class ShowMassageActivity extends AppCompatActivity {

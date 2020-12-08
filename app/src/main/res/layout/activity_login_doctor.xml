@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
     android:layout_alignParentEnd="true"
-    tools:context=".DoctorLogin">
+    tools:context=".Login_Screens.DoctorLogin">
 
     <TextView
         android:id="@+id/txt_TipTitle"

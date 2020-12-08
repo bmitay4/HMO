@@ -1,4 +1,4 @@
-package com.example.hmo;
+package com.example.hmo.Registration;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.hmo.General_Objects.NewMember;
+import com.example.hmo.Login_Screens.MainActivity;
+import com.example.hmo.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,9 +30,7 @@ public class Registration extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_client);
-
         setValues();
-
         registerButton.setOnClickListener(v -> tryRegister());
         goBack.setOnClickListener(v->finish());
     }

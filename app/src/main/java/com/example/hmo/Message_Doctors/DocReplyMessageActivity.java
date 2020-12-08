@@ -1,4 +1,4 @@
-package com.example.hmo;
+package com.example.hmo.Message_Doctors;
 
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
@@ -12,6 +12,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.hmo.General_Objects.Message;
+import com.example.hmo.General_Objects.NewDoctor;
+import com.example.hmo.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -19,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Date;
 
-public class DocReplyMassageActivity extends AppCompatActivity {
+public class DocReplyMessageActivity extends AppCompatActivity {
     private EditText subject, content;
     private Message m;
     private NewDoctor thisDoc;
@@ -57,11 +60,13 @@ public class DocReplyMassageActivity extends AppCompatActivity {
             SimpleDateFormat formatter_date = new SimpleDateFormat("dd/MM/yyyy");
             SimpleDateFormat formatter_time = new SimpleDateFormat("HH:mm:ss");
             Date date = new Date();
-            String date_string = formatter_date.format(date).replace("/","");
-            String time_string = formatter_time.format(date).replace(":","");
+            String date_msg = formatter_date.format(date);
+            String time_msg = formatter_time.format(date);
+            String date_db = date_msg.replace("/","");
+            String time_db = time_msg.replace(":","");
 
-            Message newM=new Message(localsubject,localcontent,m.getToID(),m.getToName(),m.getFromID(),m.getFromName(),date_string,time_string,false);
-            FirebaseDatabase.getInstance().getReference("Message").child(m.getFromID()).child(date_string).child(thisDoc.getUserID()).child(time_string).setValue(newM).addOnCompleteListener(new OnCompleteListener<Void>() {
+            Message newM=new Message(localsubject,localcontent,m.getToID(),m.getToName(),m.getFromID(),m.getFromName(),date_msg,time_msg,false);
+            FirebaseDatabase.getInstance().getReference("Message").child(newM.getToID()).child(date_db).child(thisDoc.getUserID()).child(time_db).setValue(newM).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     Toast.makeText(getApplicationContext(),"ההודעה נשלחה" , Toast.LENGTH_LONG).show();

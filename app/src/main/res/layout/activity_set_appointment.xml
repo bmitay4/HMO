@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
     android:layout_alignParentEnd="true"
-    tools:context=".SetAppointment">
+    tools:context=".Appointment_Doctors.SetAppointment">
 
     <TextView
         android:id="@+id/txt_DSchedulesHeadTitle"

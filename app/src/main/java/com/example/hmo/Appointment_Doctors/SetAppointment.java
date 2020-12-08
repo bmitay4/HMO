@@ -1,4 +1,4 @@
-package com.example.hmo;
+package com.example.hmo.Appointment_Doctors;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +12,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.hmo.General_Objects.Appointment;
+import com.example.hmo.General_Objects.NewDoctor;
+import com.example.hmo.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

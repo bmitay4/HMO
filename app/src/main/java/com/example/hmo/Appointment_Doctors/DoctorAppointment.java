@@ -1,4 +1,4 @@
-package com.example.hmo;
+package com.example.hmo.Appointment_Doctors;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.hmo.General_Objects.Appointment;
+import com.example.hmo.General_Objects.NewDoctor;
+import com.example.hmo.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

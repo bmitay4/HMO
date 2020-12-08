@@ -1,4 +1,4 @@
-package com.example.hmo;
+package com.example.hmo.General_Objects;
 
 import java.io.Serializable;
 
