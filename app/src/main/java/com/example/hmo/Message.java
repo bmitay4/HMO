@@ -2,14 +2,14 @@ package com.example.hmo;
 
 import java.io.Serializable;
 
-public class Massages implements Serializable {
+public class Message implements Serializable {
     private String subject, content, fromID, fromName, toID, toName, date, time;
     private Boolean read;
 
-    public Massages() {
+    public Message() {
     }
 
-    public Massages(String subject, String content, String fromID, String fromName, String toID, String toName, String date, String time, Boolean read) {
+    public Message(String subject, String content, String fromID, String fromName, String toID, String toName, String date, String time, Boolean read) {
         this.subject = subject;
         this.content = content;
         this.fromID = fromID;
@@ -95,7 +95,7 @@ public class Massages implements Serializable {
 
     @Override
     public String toString() {
-        return "Massages{" +
+        return "Message{" +
                 "subject='" + subject + '\'' +
                 ", content='" + content + '\'' +
                 ", fromID='" + fromID + '\'' +

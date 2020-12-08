@@ -1,6 +1,5 @@
 package com.example.hmo;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
@@ -44,17 +43,10 @@ public class SendMassageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_messages);
         hebrew_pick_doc = "בחר רופא";
         doc = hebrew_pick_doc;
-//        View decorView = getWindow().getDecorView();
-//        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+
         member = (NewMember) getIntent().getSerializableExtra("member");
         spin = (Spinner) findViewById(R.id.doctorsSpinner);
         getDoctor();
-//        spin.setOnItemSelectedListener(this);
-//        //Creating the ArrayAdapter instance having the country list
-//        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,doctors);
-//        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        //Setting the ArrayAdapter data on the Spinner
-//        spin.setAdapter(aa);
 
         subject = findViewById(R.id.subjectText);
         content = findViewById(R.id.contentText);
@@ -81,7 +73,6 @@ public class SendMassageActivity extends AppCompatActivity {
                     a[i] = listingdocs.get(i - 1).getUserFirstName() + " " + listingdocs.get(i - 1).getUserLastName();
                 }
                 doctors = a;
-//                spin.setOnItemSelectedListener(SendMassageActivity.this);
                 ArrayAdapter aa = new ArrayAdapter(SendMassageActivity.this, android.R.layout.simple_spinner_item, a);
                 aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spin.setAdapter(aa);
@@ -129,11 +120,13 @@ public class SendMassageActivity extends AppCompatActivity {
             SimpleDateFormat formatter_date = new SimpleDateFormat("dd/MM/yyyy");
             SimpleDateFormat formatter_time = new SimpleDateFormat("HH:mm:ss");
             Date date = new Date();
-            String date_string = formatter_date.format(date).replace("/","");
-            String time_string = formatter_time.format(date).replace(":","");
+            String date_msg = formatter_date.format(date);
+            String time_msg = formatter_time.format(date);
+            String date_db = date_msg.replace("/","");
+            String time_db = time_msg.replace(":","");
 
-            Massages m = new Massages(localsubject, localcontent, member.getUserID(), member.getUserFirstName() + " " + member.getUserLastName(), docID, doc, date_string,time_string,false);
-            FirebaseDatabase.getInstance().getReference("Massage").child(docID).child(date_string).child(member.getUserID()).child(time_string).setValue(m).addOnCompleteListener(new OnCompleteListener<Void>() {
+            Message m = new Message(localsubject, localcontent, member.getUserID(), member.getUserFirstName() + " " + member.getUserLastName(), docID, doc, date_msg,time_msg,false);
+            FirebaseDatabase.getInstance().getReference("Message").child(docID).child(date_db).child(member.getUserID()).child(time_db).setValue(m).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     Toast.makeText(getApplicationContext(), "ההודעה נשלחה", Toast.LENGTH_LONG).show();
@@ -145,7 +138,7 @@ public class SendMassageActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     Toast.makeText(getApplicationContext(), "ההודעה לא נשלחה", Toast.LENGTH_LONG).show();
-                    Log.d("Could not set value:", "sending messge to doctor failed " + e);
+                    Log.d("Could not set value:", "sending Message to doctor failed " + e);
                 }
             });
         }

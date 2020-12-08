@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -24,7 +23,7 @@ public class MailUserActivity extends Activity {
     private ListView simpleList;
     private View decorView;
     private String [] msgs;
-    private ArrayList<Massages> msg_list;
+    private ArrayList<Message> msg_list;
     private NewMember member;
     private FirebaseDatabase fdb;
     private DatabaseReference refdb;
@@ -54,7 +53,7 @@ public class MailUserActivity extends Activity {
 
         fdb = FirebaseDatabase.getInstance();
         refdb = fdb.getReference();
-        msg_list = new ArrayList<Massages>();
+        msg_list = new ArrayList<Message>();
         refdb.child("Massage").child(member.getUserID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -63,7 +62,7 @@ public class MailUserActivity extends Activity {
                     for(DataSnapshot docid : dates.getChildren()){
                         for(DataSnapshot times : docid.getChildren()){
                             System.out.println(times.getValue().toString());
-                            Massages temp = times.getValue(Massages.class);
+                            Message temp = times.getValue(Message.class);
                             msg_list.add(temp);
                         }
                     }

@@ -1,12 +1,10 @@
 package com.example.hmo;
 
 import android.content.Intent;
-import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -19,14 +17,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class MailDocActicity extends AppCompatActivity {
 
     private ListView simpleList;
     private View decorView;
     private String [] msgs;
-    private ArrayList <Massages> m;
+    private ArrayList <Message> m;
     private NewDoctor doctor;
     FirebaseDatabase fdb;
     DatabaseReference refdb;
@@ -55,7 +52,7 @@ public class MailDocActicity extends AppCompatActivity {
 
         fdb = FirebaseDatabase.getInstance();
         refdb = fdb.getReference();
-        m = new ArrayList<Massages>();
+        m = new ArrayList<Message>();
 
         refdb.child("Massage").child(doctor.getUserID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -65,7 +62,7 @@ public class MailDocActicity extends AppCompatActivity {
                     for(DataSnapshot user_id : dates.getChildren()){
                         for(DataSnapshot times : user_id.getChildren()){
                             System.out.println(times.getValue().toString());
-                            Massages temp = times.getValue(Massages.class);
+                            Message temp = times.getValue(Message.class);
                             m.add(temp);
                         }
                     }

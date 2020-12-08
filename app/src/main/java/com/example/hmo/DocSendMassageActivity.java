@@ -111,37 +111,28 @@ public class DocSendMassageActivity extends AppCompatActivity {
         else if (userID.isEmpty() || userName.equals(hebrew_pick_user))
             Toast.makeText(getApplicationContext(), "אנא בחר מטופל", Toast.LENGTH_LONG).show();
         else {
-            refdb.child("Massage").child(userID).addValueEventListener(new ValueEventListener() {
+            SimpleDateFormat formatter_date = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat formatter_time = new SimpleDateFormat("HH:mm:ss");
+            Date date = new Date();
+            String date_msg = formatter_date.format(date);
+            String time_msg = formatter_time.format(date);
+            String date_db = date_msg.replace("/","");
+            String time_db = time_msg.replace(":","");
+
+            Message m = new Message(localsubject, localcontent, thisDoc.getUserID(), thisDoc.getUserFirstName() + " " + thisDoc.getUserLastName(), userID, userName,date_msg,time_msg,false);
+            FirebaseDatabase.getInstance().getReference("Message").child(userID).child(date_db).child(thisDoc.getUserID()).child(time_db).setValue(m).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    SimpleDateFormat formatter_date = new SimpleDateFormat("dd/MM/yyyy");
-                    SimpleDateFormat formatter_time = new SimpleDateFormat("HH:mm:ss");
-                    Date date = new Date();
-                    String date_string = formatter_date.format(date);
-                    String time_string = formatter_time.format(date);
-
-                    Massages m = new Massages(localsubject, localcontent, thisDoc.getUserID(), thisDoc.getUserFirstName() + " " + thisDoc.getUserLastName(), userID, userName,date_string,time_string,false);
-                    FirebaseDatabase.getInstance().getReference("Massage").child(userID).setValue(m).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            Toast.makeText(getApplicationContext(), "ההודעה נשלחה", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(getApplicationContext(), DoctorLogin.class);
-                            intent.putExtra("doctor", thisDoc);
-                            startActivity(intent);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getApplicationContext(), "ההודעה לא נשלחה", Toast.LENGTH_LONG).show();
-                            Log.d("Could not set value:", "sending messge to user failed " + e);
-                        }
-                    });
-
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(getApplicationContext(), "ההודעה נשלחה", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(), DoctorLogin.class);
+                    intent.putExtra("doctor", thisDoc);
+                    startActivity(intent);
                 }
-
+            }).addOnFailureListener(new OnFailureListener() {
                 @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), "ההודעה לא נשלחה", Toast.LENGTH_LONG).show();
+                    Log.d("Could not set value:", "sending Message to user failed " + e);
                 }
             });
         }

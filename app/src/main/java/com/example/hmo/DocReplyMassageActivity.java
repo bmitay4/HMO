@@ -15,16 +15,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.Date;
 
 public class DocReplyMassageActivity extends AppCompatActivity {
     private EditText subject, content;
-    private Massages m;
+    private Message m;
     private NewDoctor thisDoc;
     private Button reply;
 
@@ -32,7 +29,7 @@ public class DocReplyMassageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reply);
 
-        m=(Massages) getIntent().getSerializableExtra("msg");
+        m=(Message) getIntent().getSerializableExtra("msg");
         thisDoc = (NewDoctor) getIntent().getSerializableExtra("doctor");
 
         subject = findViewById(R.id.replySubject);
@@ -63,8 +60,8 @@ public class DocReplyMassageActivity extends AppCompatActivity {
             String date_string = formatter_date.format(date).replace("/","");
             String time_string = formatter_time.format(date).replace(":","");
 
-            Massages newM=new Massages(localsubject,localcontent,m.getToID(),m.getToName(),m.getFromID(),m.getFromName(),date_string,time_string,false);
-            FirebaseDatabase.getInstance().getReference("Massage").child(m.getFromID()).child(date_string).child(thisDoc.getUserID()).child(time_string).setValue(newM).addOnCompleteListener(new OnCompleteListener<Void>() {
+            Message newM=new Message(localsubject,localcontent,m.getToID(),m.getToName(),m.getFromID(),m.getFromName(),date_string,time_string,false);
+            FirebaseDatabase.getInstance().getReference("Message").child(m.getFromID()).child(date_string).child(thisDoc.getUserID()).child(time_string).setValue(newM).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     Toast.makeText(getApplicationContext(),"ההודעה נשלחה" , Toast.LENGTH_LONG).show();
