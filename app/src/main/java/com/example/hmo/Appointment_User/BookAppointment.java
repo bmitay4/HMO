@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,10 +35,11 @@ public class BookAppointment extends AppCompatActivity {
     private CalendarView cal;
     private ArrayAdapter arrdoc, times;
     private Appointment picked_apt;
-    private ArrayList<String> listingdocs;
+    private ArrayList<String> doc_full_name;
     private ArrayList<NewDoctor> docList;
     private String date, docid;
     private Button confirmButton, goBackButton;
+    private SearchView doc_search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,21 +54,16 @@ public class BookAppointment extends AppCompatActivity {
         refdb.child("Doctors").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                listingdocs = new ArrayList<String>();
+                doc_full_name = new ArrayList<String>();
                 docList = new ArrayList<>();
                 for (DataSnapshot doc : snapshot.getChildren()) {
                     NewDoctor d = doc.getValue(NewDoctor.class);
                     assert d != null; //Should'nt be NULL at any case
-                    listingdocs.add(d.getUserFirstName() + " " + d.getUserLastName() + ", " + d.getUserSpec());
+                    doc_full_name.add(d.getUserFirstName() + " " + d.getUserLastName() + ", " + d.getUserSpec());
                     docList.add(d);
                 }
-//                String[] a = new String[listingdocs.size()];
-//                for (int i = 0; i < a.length; i++) {
-//                    NewDoctor doc = doctorList.get(i);
-//                    a[i] = doc.getUserFirstName() + " " + doc.getUserLastName();
-////                    a[i] = listingdocs.get(i);
-//                }
-                arrdoc = new ArrayAdapter(BookAppointment.this, android.R.layout.simple_list_item_1, listingdocs);
+
+                arrdoc = new ArrayAdapter(BookAppointment.this, android.R.layout.simple_list_item_1, doc_full_name);
                 doclist.setAdapter(arrdoc);
             }
 
@@ -76,7 +73,6 @@ public class BookAppointment extends AppCompatActivity {
         });
 
         //Hold Doctor ID after the user picks it
-        // TODO: Need to make on click listener for the list to pick doc
         doclist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -84,6 +80,21 @@ public class BookAppointment extends AppCompatActivity {
             }
         });
 
+
+        //Search doctor
+        doc_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                BookAppointment.this.arrdoc.getFilter().filter(s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                BookAppointment.this.arrdoc.getFilter().filter(s);
+                return false;
+            }
+        });
         // pick date
         cal.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -107,16 +118,15 @@ public class BookAppointment extends AppCompatActivity {
                     }
                     String date2db = date.replace(".", "");
                     // Pick the right branch Events -> DocID -> Date
-                    DatabaseReference eventrf = refdb.child("Appointments").child(docid).child(date2db);
+                    DatabaseReference ref_apt = refdb.child("Appointments").child(docid).child(date2db);
 
                     // Gets all the available appointments
-                    eventrf.addListenerForSingleValueEvent(new ValueEventListener() {
+                    ref_apt.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             ArrayList<Appointment> listapt = new ArrayList<Appointment>();
                             for (DataSnapshot value : snapshot.getChildren()) {
                                 Appointment apt = value.getValue(Appointment.class);
-//                                System.out.println(apt.toString());
                                 if (apt.getAvailable()) {
                                     listapt.add(apt);
                                 }
@@ -135,10 +145,7 @@ public class BookAppointment extends AppCompatActivity {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     picked_apt = (Appointment) listapt.get(position);
-//                                    Intent i = new Intent(BookAppointment.this, ConfirmAppointment.class);
-//                                    i.putExtra("user", user);
-//                                    i.putExtra("picked_apt", picked_apt);
-//                                    startActivity(i);
+
                                 }
                             });
 
@@ -162,9 +169,12 @@ public class BookAppointment extends AppCompatActivity {
         refdb = fdb.getReference();
         cal = findViewById(R.id.pickdate);
         doclist = findViewById(R.id.doclist);
+        doclist.setSelector(R.color.purple_200);
         aptlist = findViewById(R.id.aptlist);
+        aptlist.setSelector(R.color.purple_200);
         confirmButton = findViewById(R.id.Button_AppointmentConfirm);
         goBackButton = findViewById(R.id.Button_AppointmentGoHome);
+        doc_search = findViewById(R.id.Doc_Search);
     }
 
     private void confirmQueue() {
