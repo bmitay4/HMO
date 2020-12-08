@@ -57,7 +57,7 @@ public class MailUserActivity extends Activity {
         fdb = FirebaseDatabase.getInstance();
         refdb = fdb.getReference();
         msg_list = new ArrayList<Message>();
-        refdb.child("Massage").child(member.getUserID()).addListenerForSingleValueEvent(new ValueEventListener() {
+        refdb.child("Message").child(member.getUserID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -69,11 +69,10 @@ public class MailUserActivity extends Activity {
                             msg_list.add(temp);
                         }
                     }
-
                 }
                 String[] a = new String[msg_list.size()];
                 for (int i = 0; i < a.length; i++) {
-                    a[i] = "הודעה חדשה מ"+msg_list.get(i).getFromName();
+                    a[i] = "הודעה חדשה מ"+msg_list.get(i).getFromName()+ " "+msg_list.get(i).getSubject();
                 }
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MailUserActivity.this, android.R.layout.simple_list_item_1, a);
                 simpleList.setAdapter(arrayAdapter);

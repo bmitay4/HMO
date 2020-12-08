@@ -89,12 +89,7 @@ public class SetAppointment extends AppCompatActivity {
             Toast.makeText(SetAppointment.this, "No date picked",
                     Toast.LENGTH_SHORT).show();
         }
-//        // TODO: need to check how if the day picked is before "today"
-//        else if(date < today.toString() ){
-//            Log.d(TAG, "Invalied date");
-//            Toast.makeText(SetAppointment.this, "Invalied date",
-//                    Toast.LENGTH_SHORT).show();
-//        }
+
         else {
             // Connect to DB. Appointments -> DocID -> Date
             FirebaseDatabase fdb = FirebaseDatabase.getInstance();
