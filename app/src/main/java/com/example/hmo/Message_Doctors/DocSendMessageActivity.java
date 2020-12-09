@@ -63,7 +63,7 @@ public class DocSendMessageActivity extends AppCompatActivity {
     public void getUsers() {
         fdb = FirebaseDatabase.getInstance();
         refdb = fdb.getReference();
-        refdb.child("User").addListenerForSingleValueEvent(new ValueEventListener() {
+        refdb.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 listinguser = new ArrayList<NewMember>();
@@ -73,7 +73,7 @@ public class DocSendMessageActivity extends AppCompatActivity {
                 }
                 String[] a = new String[listinguser.size() + 1];
                 a[0] = hebrew_pick_user;
-                for (int i = 0; i < a.length; i++) {
+                for (int i = 1; i < a.length; i++) {
                     a[i] = listinguser.get(i - 1).getUserFirstName() + " " + listinguser.get(i - 1).getUserLastName();
                 }
                 users = a;
@@ -132,6 +132,7 @@ public class DocSendMessageActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), DoctorLogin.class);
                     intent.putExtra("doctor", thisDoc);
                     startActivity(intent);
+                    finish();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override

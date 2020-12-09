@@ -10,13 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hmo.Appointment_Doctors.DoctorAppointment;
 import com.example.hmo.General_Objects.NewDoctor;
+import com.example.hmo.Message_Doctors.DocSendMessageActivity;
 import com.example.hmo.Message_Doctors.MailDocActicity;
 import com.example.hmo.R;
 import com.example.hmo.Appointment_Doctors.SetAppointment;
 
 public class DoctorLogin extends AppCompatActivity {
     private TextView doctorName;
-    private Button DocSchedules, DocAppointment;
+    private Button DocSchedules, DocAppointment, DocSendmsg;
     private NewDoctor doctor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,15 @@ public class DoctorLogin extends AppCompatActivity {
             }
         });
 
+        DocSendmsg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getApplicationContext(), DocSendMessageActivity.class);
+                intent.putExtra("doctor",doctor);
+                startActivity(intent);
+            }
+        });
+
         Button msg = findViewById(R.id.button_notifications);
         Intent intent=new Intent(getApplicationContext(), MailDocActicity.class);
         intent.putExtra("doctor",doctor);
@@ -50,6 +60,7 @@ public class DoctorLogin extends AppCompatActivity {
     private void setValues(){
         DocSchedules = findViewById(R.id.button_DocSchedules);
         doctorName = findViewById(R.id.txt_doctorFullName);
+        DocSendmsg = findViewById(R.id.button_DocMail);
         doctor = (NewDoctor) getIntent().getSerializableExtra("doctor");
         doctorName.setText(" ד\"ר " +doctor.getUserFirstName()+" "+doctor.getUserLastName());
         DocAppointment = findViewById(R.id.button_queues);

@@ -27,8 +27,6 @@ public class MailUserActivity extends Activity {
 
     private ListView simpleList;
     private ArrayAdapter<String> arrayAdapter;
-    private View decorView;
-    private String[] msgs;
     private ArrayList<Message> msg_list;
     private NewMember member;
     private FirebaseDatabase fdb;
@@ -104,6 +102,7 @@ public class MailUserActivity extends Activity {
         });
 
     }
+
 
     private void getMessage() {
 

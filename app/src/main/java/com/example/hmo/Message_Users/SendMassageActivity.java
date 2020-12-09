@@ -138,6 +138,7 @@ public class SendMassageActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), ClientLogin.class);
                     intent.putExtra("member", member);
                     startActivity(intent);
+                    finish();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override

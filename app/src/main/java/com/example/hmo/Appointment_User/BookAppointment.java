@@ -77,6 +77,9 @@ public class BookAppointment extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 docid = docList.get(position).getUserID();
+                if(date != null){
+                    show_avilable_time();
+                }
             }
         });
 
@@ -92,9 +95,10 @@ public class BookAppointment extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String s) {
                 BookAppointment.this.arrdoc.getFilter().filter(s);
-                return false;
+                return true;
             }
         });
+
         // pick date
         cal.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -116,49 +120,51 @@ public class BookAppointment extends AppCompatActivity {
                     else{
                         date = date +(month+1)+"."+year;
                     }
-                    String date2db = date.replace(".", "");
-                    // Pick the right branch Events -> DocID -> Date
-                    DatabaseReference ref_apt = refdb.child("Appointments").child(docid).child(date2db);
-
-                    // Gets all the available appointments
-                    ref_apt.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            ArrayList<Appointment> listapt = new ArrayList<Appointment>();
-                            for (DataSnapshot value : snapshot.getChildren()) {
-                                Appointment apt = value.getValue(Appointment.class);
-                                if (apt.getAvailable()) {
-                                    listapt.add(apt);
-                                }
-                            }
-
-                            //Set as list and show on listview
-                            String[] a = new String[listapt.size()];
-                            for (int i = 0; i < a.length; i++) {
-                                a[i] = listapt.get(i).getTime();
-                            }
-                            times = new ArrayAdapter(BookAppointment.this, android.R.layout.simple_list_item_1, a);
-                            aptlist.setAdapter(times);
-
-                            //If clicked on one of the appointments
-                            aptlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                @Override
-                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                    picked_apt = (Appointment) listapt.get(position);
-
-                                }
-                            });
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-
 
                 }
+            }
+        });
+    }
+
+    private void show_avilable_time() {
+        String date2db = date.replace(".", "");
+        // Pick the right branch Events -> DocID -> Date
+        DatabaseReference ref_apt = refdb.child("Appointments").child(docid).child(date2db);
+
+        // Gets all the available appointments
+        ref_apt.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Appointment> listapt = new ArrayList<Appointment>();
+                for (DataSnapshot value : snapshot.getChildren()) {
+                    Appointment apt = value.getValue(Appointment.class);
+                    if (apt.getAvailable()) {
+                        listapt.add(apt);
+                    }
+                }
+
+                //Set as list and show on listview
+                String[] a = new String[listapt.size()];
+                for (int i = 0; i < a.length; i++) {
+                    a[i] = listapt.get(i).getTime();
+                }
+                times = new ArrayAdapter(BookAppointment.this, android.R.layout.simple_list_item_1, a);
+                aptlist.setAdapter(times);
+
+                //If clicked on one of the appointments
+                aptlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        picked_apt = (Appointment) listapt.get(position);
+
+                    }
+                });
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }
@@ -169,9 +175,9 @@ public class BookAppointment extends AppCompatActivity {
         refdb = fdb.getReference();
         cal = findViewById(R.id.pickdate);
         doclist = findViewById(R.id.doclist);
-        doclist.setSelector(R.color.purple_200);
+        doclist.setSelector(R.color.teal_200);
         aptlist = findViewById(R.id.aptlist);
-        aptlist.setSelector(R.color.purple_200);
+        aptlist.setSelector(R.color.teal_200);
         confirmButton = findViewById(R.id.Button_AppointmentConfirm);
         goBackButton = findViewById(R.id.Button_AppointmentGoHome);
         doc_search = findViewById(R.id.Doc_Search);
