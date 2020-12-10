@@ -76,6 +76,7 @@ public class MailDocActicity extends AppCompatActivity {
     }
 
     private void getArchiveMessage() {
+        m = new ArrayList<Message>();
         refdb.child("MessageArchive").child(doctor.getUserID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -108,7 +109,7 @@ public class MailDocActicity extends AppCompatActivity {
 
     private void getMessage() {
 
-
+        m = new ArrayList<Message>();
         refdb.child("Message").child(doctor.getUserID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

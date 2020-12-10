@@ -59,7 +59,7 @@ public class DocShowMessageActivity extends AppCompatActivity {
         String date_db = m.getDate().replace("/","");
         String time_db = m.getTime().replace(":","");
         m.setRead(true);
-        refdb.child("Message").child(doctor.getUserID()).child(date_db).child(m.getFromID()).child(time_db).child("read").removeValue().addOnFailureListener(new OnFailureListener() {
+        refdb.child("Message").child(doctor.getUserID()).child(date_db).child(m.getFromID()).child(time_db).removeValue().addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Log.d("Remove value:","Faild to remove value from DB "+e);
