@@ -45,8 +45,7 @@ public class DocSendMessageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+
         hebrew_pick_user = "בחר מטופל";
         userName = hebrew_pick_user;
 
@@ -139,6 +138,7 @@ public class DocSendMessageActivity extends AppCompatActivity {
                 public void onFailure(@NonNull Exception e) {
                     Toast.makeText(getApplicationContext(), "ההודעה לא נשלחה", Toast.LENGTH_LONG).show();
                     Log.d("Could not set value:", "sending Message to user failed " + e);
+                    e.printStackTrace();
                 }
             });
         }

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hmo.Appointment_Doctors.DoctorAppointment;
@@ -14,6 +15,10 @@ import com.example.hmo.Message_Doctors.DocSendMessageActivity;
 import com.example.hmo.Message_Doctors.MailDocActicity;
 import com.example.hmo.R;
 import com.example.hmo.Appointment_Doctors.SetAppointment;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class DoctorLogin extends AppCompatActivity {
     private TextView doctorName;
@@ -57,6 +62,7 @@ public class DoctorLogin extends AppCompatActivity {
         intent.putExtra("doctor",doctor);
         msg.setOnClickListener(v -> startActivity(intent));
     }
+
     private void setValues(){
         DocSchedules = findViewById(R.id.button_DocSchedules);
         doctorName = findViewById(R.id.txt_doctorFullName);

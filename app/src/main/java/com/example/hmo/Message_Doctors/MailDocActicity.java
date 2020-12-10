@@ -2,6 +2,7 @@ package com.example.hmo.Message_Doctors;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hmo.General_Objects.Message;
 import com.example.hmo.General_Objects.NewDoctor;
+import com.example.hmo.Message_Users.MailUserActivity;
+import com.example.hmo.Message_Users.SendMassageActivity;
 import com.example.hmo.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,31 +41,9 @@ public class MailDocActicity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mail_doc);
 
-        doctor = (NewDoctor) getIntent().getSerializableExtra("doctor");
-        simpleList = (ListView) findViewById(R.id.allMsgs);
-        new_msg = findViewById(R.id.Doc_Mail_newMassage);
-        archive_msg = findViewById(R.id.DocMsg_New_Or_Archive);
-        back_home = findViewById(R.id.Doc_Mail_Back);
-        fdb = FirebaseDatabase.getInstance();
-        refdb = fdb.getReference();
-        m = new ArrayList<Message>();
-
-        getMessage();
-        archive_msg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!isArchive) {
-                    isArchive = true;
-                    archive_msg.setText("הודעות חדשות");
-                    getArchiveMessage();
-                } else {
-                    isArchive = false;
-                    archive_msg.setText("הודעות ישנות");
-                    getMessage();
-                }
-            }
-        });
-
+        setup();
+        new_msg.setOnClickListener(v -> doc_new_msg());
+        archive_msg.setOnClickListener(v -> set_button());
         simpleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -75,12 +56,52 @@ public class MailDocActicity extends AppCompatActivity {
 
     }
 
-    private void getArchiveMessage() {
+
+    protected void onResume() {
+        super.onResume();
+        if(!isArchive){
+            getMessage();
+        }else{
+            getArchiveMessage();
+        }
+
+    }
+
+    private void setup() {
+        doctor = (NewDoctor) getIntent().getSerializableExtra("doctor");
+        simpleList = (ListView) findViewById(R.id.allMsgs);
+        new_msg = findViewById(R.id.Doc_Mail_newMassage);
+        archive_msg = findViewById(R.id.DocMsg_New_Or_Archive);
+        back_home = findViewById(R.id.Doc_Mail_Back);
+        fdb = FirebaseDatabase.getInstance();
+        refdb = fdb.getReference();
         m = new ArrayList<Message>();
+    }
+    private void doc_new_msg() {
+        Intent i = new Intent(MailDocActicity.this, DocSendMessageActivity.class);
+        i.putExtra("doctor", doctor);
+        startActivity(i);
+    }
+
+    private void set_button() {
+        if (!isArchive) {
+            isArchive = true;
+            archive_msg.setText("הודעות חדשות");
+            getArchiveMessage();
+        } else {
+            isArchive = false;
+            archive_msg.setText("הודעות ישנות");
+            getMessage();
+        }
+    }
+
+    private void getArchiveMessage() {
+
+
         refdb.child("MessageArchive").child(doctor.getUserID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                m = new ArrayList<Message>();
                 for (DataSnapshot dates : snapshot.getChildren()) {
                     for(DataSnapshot user_id : dates.getChildren()){
                         for(DataSnapshot times : user_id.getChildren()){
@@ -109,11 +130,11 @@ public class MailDocActicity extends AppCompatActivity {
 
     private void getMessage() {
 
-        m = new ArrayList<Message>();
+
         refdb.child("Message").child(doctor.getUserID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                m = new ArrayList<Message>();
                 for (DataSnapshot dates : snapshot.getChildren()) {
                     for(DataSnapshot user_id : dates.getChildren()){
                         for(DataSnapshot times : user_id.getChildren()){
@@ -130,6 +151,7 @@ public class MailDocActicity extends AppCompatActivity {
                 }
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MailDocActicity.this, android.R.layout.simple_list_item_1, a);
                 simpleList.setAdapter(arrayAdapter);
+
             }
 
             @Override

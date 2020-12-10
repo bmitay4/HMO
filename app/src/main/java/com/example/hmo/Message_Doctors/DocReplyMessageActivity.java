@@ -32,9 +32,9 @@ public class DocReplyMessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reply);
 
+        // Get msg and doc
         m=(Message) getIntent().getSerializableExtra("msg");
         thisDoc = (NewDoctor) getIntent().getSerializableExtra("doctor");
-
         subject = findViewById(R.id.replySubject);
         content = findViewById(R.id.replyContent);
         subject.setText("reply:"+m.getSubject());

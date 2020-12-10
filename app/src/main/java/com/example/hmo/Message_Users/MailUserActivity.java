@@ -39,28 +39,9 @@ public class MailUserActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mail_user);
 
-        member = (NewMember) getIntent().getSerializableExtra("member");
-        simpleList = (ListView) findViewById(R.id.userMails);
-        new_msg = findViewById(R.id.Mail_User_newMassage);
-        archive_msg = findViewById(R.id.Msg_New_Or_Archive);
-        back_home = findViewById(R.id.Mail_User_Back);
-        fdb = FirebaseDatabase.getInstance();
-        refdb = fdb.getReference();
-        user_msg_search = findViewById(R.id.User_Msg_Search);
-
-        new_msg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MailUserActivity.this, SendMassageActivity.class);
-                i.putExtra("member", member);
-                startActivity(i);
-            }
-        });
-
+        setup();
+        new_msg.setOnClickListener(v-> user_new_msg());
         back_home.setOnClickListener(v -> finish());
-
-        getMessage();
-
         user_msg_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -74,23 +55,7 @@ public class MailUserActivity extends Activity {
                 return false;
             }
         });
-
-
-        archive_msg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!isArchive) {
-                    isArchive = true;
-                    archive_msg.setText("הודעות חדשות");
-                    getArchiveMessage();
-                } else {
-                    isArchive = false;
-                    archive_msg.setText("הודעות ישנות");
-                    getMessage();
-                }
-            }
-        });
-
+        archive_msg.setOnClickListener(v -> set_button());
         simpleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -103,6 +68,45 @@ public class MailUserActivity extends Activity {
 
     }
 
+    protected void onResume() {
+        super.onResume();
+        if(!isArchive){
+            getMessage();
+        }else{
+            getArchiveMessage();
+        }
+
+    }
+
+    private void set_button() {
+        if (!isArchive) {
+            isArchive = true;
+            archive_msg.setText("הודעות חדשות");
+            getArchiveMessage();
+        } else {
+            isArchive = false;
+            archive_msg.setText("הודעות ישנות");
+            getMessage();
+        }
+    }
+
+    private void user_new_msg() {
+        Intent i = new Intent(MailUserActivity.this, SendMassageActivity.class);
+        i.putExtra("member", member);
+        startActivity(i);
+    }
+
+    private void setup() {
+        member = (NewMember) getIntent().getSerializableExtra("member");
+        simpleList = (ListView) findViewById(R.id.userMails);
+        new_msg = findViewById(R.id.Mail_User_newMassage);
+        archive_msg = findViewById(R.id.Msg_New_Or_Archive);
+        back_home = findViewById(R.id.Mail_User_Back);
+        fdb = FirebaseDatabase.getInstance();
+        refdb = fdb.getReference();
+        user_msg_search = findViewById(R.id.User_Msg_Search);
+    }
+
 
     private void getMessage() {
 
@@ -110,7 +114,7 @@ public class MailUserActivity extends Activity {
         refdb.child("Message").child(member.getUserID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                msg_list = new ArrayList<Message>();
                 for (DataSnapshot dates : snapshot.getChildren()) {
                     for (DataSnapshot docid : dates.getChildren()) {
                         for (DataSnapshot times : docid.getChildren()) {
@@ -140,11 +144,11 @@ public class MailUserActivity extends Activity {
 
     private void getArchiveMessage() {
 
-        msg_list = new ArrayList<Message>();
+
         refdb.child("MessageArchive").child(member.getUserID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                msg_list = new ArrayList<Message>();
                 for (DataSnapshot dates : snapshot.getChildren()) {
                     for (DataSnapshot docid : dates.getChildren()) {
                         for (DataSnapshot times : docid.getChildren()) {
