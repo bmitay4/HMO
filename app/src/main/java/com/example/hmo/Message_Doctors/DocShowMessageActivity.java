@@ -50,6 +50,7 @@ public class DocShowMessageActivity extends AppCompatActivity {
                 intent.putExtra("msg", m);
                 intent.putExtra("doctor", doctor);
                 startActivity(intent);
+                finish();
             }
         });
 

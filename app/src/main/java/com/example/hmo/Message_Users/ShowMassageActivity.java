@@ -52,6 +52,7 @@ public class ShowMassageActivity extends AppCompatActivity {
                 i.putExtra("msg",msg);
                 i.putExtra("member",member);
                 startActivity(i);
+                finish();
             }
         });
     }

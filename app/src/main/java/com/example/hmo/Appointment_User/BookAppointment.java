@@ -119,6 +119,7 @@ public class BookAppointment extends AppCompatActivity {
                     }
                     else{
                         date = date +(month+1)+"."+year;
+                        show_avilable_time();
                     }
 
                 }

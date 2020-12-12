@@ -73,6 +73,7 @@ public class DocReplyMessageActivity extends AppCompatActivity {
                     Intent intent=new Intent(getApplicationContext(), MailDocActicity.class);
                     intent.putExtra("doctor",thisDoc);
                     startActivity(intent);
+                    finish();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
