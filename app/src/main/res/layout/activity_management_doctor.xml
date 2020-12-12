@@ -10,50 +10,40 @@
     tools:context=".Panels_Screens.DoctorsPanel">
 
     <Button
-        android:id="@+id/Button_MDocsGoToHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/Button_DoctorPanelRemove"
+        android:layout_width="109dp"
+        android:layout_height="52dp"
         android:backgroundTint="#87BADD"
+        android:text="מחק "
+        android:textSize="18sp"
+        app:icon="@drawable/deleteicon"
+        app:iconPadding="11dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Button_DoctorPanelRefresh"
+        app:layout_constraintVertical_bias="0.028" />
+
+    <EditText
+        android:id="@+id/txt_MDocFN"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
         android:gravity="right|center_vertical"
-        android:text="חזור למסך הבית"
+        android:hint="שם פרטי"
+        android:inputType="textPersonName"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.067"
+        app:layout_constraintHorizontal_bias="0.896"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.941" />
-
-    <ImageView
-        android:id="@+id/Button_MDocRemove"
-        android:layout_width="35dp"
-        android:layout_height="38dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.117"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.198"
-        app:srcCompat="@drawable/delete" />
-
-    <Button
-        android:id="@+id/Button_MDocsCreate"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#87BADD"
-        android:gravity="center_vertical"
-        android:text="הוסף רופא"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.885"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.941" />
+        app:layout_constraintVertical_bias="0.584" />
 
     <EditText
         android:id="@+id/txt_MDocsPassword"
-        android:layout_width="210dp"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:gravity="right|center_vertical"
@@ -62,14 +52,58 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.925"
+        app:layout_constraintHorizontal_bias="0.077"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.855" />
+        app:layout_constraintVertical_bias="0.763" />
+
+    <EditText
+        android:id="@+id/txt_MDocLN"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="right|center_vertical"
+        android:hint="שם משפחה"
+        android:inputType="textPersonName"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.077"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.584" />
+
+    <Button
+        android:id="@+id/Button_MDocsCreate"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#87BADD"
+        android:text="הוסף רופא"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.871" />
+
+    <TextView
+        android:id="@+id/txt_MDocsTitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="הוסף רופא"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.923"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.514" />
 
     <EditText
         android:id="@+id/txt_MDocSpecialization"
-        android:layout_width="210dp"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:ems="10"
@@ -80,44 +114,14 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.925"
+        app:layout_constraintHorizontal_bias="0.077"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.441" />
-
-    <TextView
-        android:id="@+id/txt_MDocsTitle2"
-        android:layout_width="218dp"
-        android:layout_height="38dp"
-        android:text="הוסף רופא"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.922"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.365" />
-
-    <EditText
-        android:id="@+id/txt_MDocFN"
-        android:layout_width="210dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:gravity="right|center_vertical"
-        android:hint="שם פרטי"
-        android:inputType="textPersonName"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.925"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.527" />
+        app:layout_constraintVertical_bias="0.674" />
 
     <EditText
         android:id="@+id/txt_MDocID"
-        android:layout_width="210dp"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:gravity="right|center_vertical"
@@ -126,30 +130,14 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.925"
+        app:layout_constraintHorizontal_bias="0.896"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.695" />
-
-    <EditText
-        android:id="@+id/txt_MDocLN"
-        android:layout_width="210dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:gravity="right|center_vertical"
-        android:hint="שם משפחה"
-        android:inputType="textPersonName"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.925"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.61" />
+        app:layout_constraintVertical_bias="0.674" />
 
     <EditText
         android:id="@+id/txt_MDocEmail"
-        android:layout_width="210dp"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:gravity="right|center_vertical"
@@ -158,25 +146,40 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.925"
+        app:layout_constraintHorizontal_bias="0.896"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.776" />
+        app:layout_constraintVertical_bias="0.763" />
+
+    <Button
+        android:id="@+id/Button_MDocsGoToHome"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#87BADD"
+        android:gravity="right|center_vertical"
+        android:text="חזור למסך הבית"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.964" />
 
     <TextView
         android:id="@+id/txt_MDocsTitle"
-        android:layout_width="218dp"
-        android:layout_height="38dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="right|center_vertical"
         android:text="ניהול הצוות רפואי"
         android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.917"
+        app:layout_constraintHorizontal_bias="0.875"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.063" />
+        app:layout_constraintVertical_bias="0.062" />
 
     <ImageView
         android:id="@+id/Img_MDocsLogo"
@@ -193,25 +196,39 @@
     <Spinner
         android:id="@+id/MDocSpinner"
         android:layout_width="245dp"
-        android:layout_height="44dp"
-        android:gravity="start"
+        android:layout_height="50dp"
+        android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.909"
+        app:layout_constraintHorizontal_bias="0.855"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.197" />
+        app:layout_constraintVertical_bias="0.196" />
 
-    <ImageView
-        android:id="@+id/Button_MDocRefresh"
-        android:layout_width="38dp"
-        android:layout_height="40dp"
+    <Button
+        android:id="@+id/Button_DoctorPanelRefresh"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:backgroundTint="#87BADD"
+        android:text="רענן"
+        android:textSize="18sp"
+        app:icon="@drawable/refresh"
+        app:iconPadding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.262"
+        app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.197"
-        app:srcCompat="@drawable/refresh" />
+        app:layout_constraintVertical_bias="0.196" />
+
+    <TextView
+        android:id="@+id/txt_DoctorPanelInfo"
+        android:layout_width="339dp"
+        android:layout_height="75dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.402" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
