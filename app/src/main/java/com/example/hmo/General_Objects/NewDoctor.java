@@ -3,25 +3,25 @@ package com.example.hmo.General_Objects;
 import java.io.Serializable;
 
 public class NewDoctor implements Serializable {
-    private String authID, userID, userFirstName, userLastName, userEmail, userPassword, userSpec, userGender;
+    private String authID, userID, userFirstName, userLastName, userEmail, userPassword, userSpec, userGender, docBranch;
 
     //no-argument constructor
     public NewDoctor(){
 
     }
+//Old Version Constructor
+//    public NewDoctor(String authID, String userID, String userFirstName, String userLastName, String userEmail, String userPassword, String userSpec, String userGender) {
+//        this.authID = authID;
+//        this.userID = userID;
+//        this.userFirstName = userFirstName;
+//        this.userLastName = userLastName;
+//        this.userEmail = userEmail;
+//        this.userPassword = userPassword;
+//        this.userSpec = userSpec;
+//        this.userGender = userGender;
+//    }
 
-    public NewDoctor(String authID, String userID, String userFirstName, String userLastName, String userEmail, String userPassword, String userSpec, String userGender) {
-        this.authID = authID;
-        this.userID = userID;
-        this.userFirstName = userFirstName;
-        this.userLastName = userLastName;
-        this.userEmail = userEmail;
-        this.userPassword = userPassword;
-        this.userSpec = userSpec;
-        this.userGender = userGender;
-    }
-
-    public NewDoctor(String aID, String uID, String firstName, String lastName, String email, String Pass, String spec) {
+    public NewDoctor(String aID, String uID, String firstName, String lastName, String email, String Pass, String spec, String docBranch) {
         this.authID = aID;
         this.userID = uID;
         this.userFirstName = firstName;
@@ -29,6 +29,7 @@ public class NewDoctor implements Serializable {
         this.userEmail = email;
         this.userPassword = Pass;
         this.userSpec = spec;
+        this.docBranch = docBranch;
     }
     //Getters
     public String getAuthID() {
@@ -59,7 +60,10 @@ public class NewDoctor implements Serializable {
         return userSpec;
     }
 
-    //Setters
+    public String getDocBranch() {
+        return docBranch;
+    }
+//Setters
 
     public void setAuthID(String authID) {
         this.authID = authID;
@@ -99,5 +103,9 @@ public class NewDoctor implements Serializable {
 
     public void setUserGender(String userGender) {
         this.userGender = userGender;
+    }
+
+    public void setDocBranch(String docBranch) {
+        this.docBranch = docBranch;
     }
 }

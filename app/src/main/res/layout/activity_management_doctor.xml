@@ -9,6 +9,17 @@
     android:layout_height="match_parent"
     tools:context=".Panels_Screens.DoctorsPanel">
 
+    <Spinner
+        android:id="@+id/MDocSpinnerChooseCity"
+        android:layout_width="180dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.85" />
+
     <Button
         android:id="@+id/Button_DoctorPanelRemove"
         android:layout_width="109dp"
@@ -30,7 +41,7 @@
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:gravity="right|center_vertical"
+        android:gravity="start|center_vertical"
         android:hint="שם פרטי"
         android:inputType="textPersonName"
         android:textSize="18sp"
@@ -46,7 +57,7 @@
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:gravity="right|center_vertical"
+        android:gravity="right"
         android:hint="סיסמא"
         android:inputType="numberPassword"
         android:textSize="18sp"
@@ -82,10 +93,10 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.887"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.871" />
+        app:layout_constraintVertical_bias="0.964" />
 
     <TextView
         android:id="@+id/txt_MDocsTitle2"
@@ -117,14 +128,15 @@
         app:layout_constraintHorizontal_bias="0.077"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.674" />
+        app:layout_constraintVertical_bias="0.674"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/txt_MDocID"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:gravity="right|center_vertical"
+        android:gravity="right"
         android:hint="תעודת זהות"
         android:inputType="number|textPersonName"
         android:textSize="18sp"
@@ -149,19 +161,20 @@
         app:layout_constraintHorizontal_bias="0.896"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.763" />
+        app:layout_constraintVertical_bias="0.763"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/Button_MDocsGoToHome"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#87BADD"
-        android:gravity="right|center_vertical"
+        android:gravity="center_vertical"
         android:text="חזור למסך הבית"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.077"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.964" />
@@ -170,7 +183,7 @@
         android:id="@+id/txt_MDocsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="right|center_vertical"
+        android:gravity="center_vertical"
         android:text="ניהול הצוות רפואי"
         android:textSize="26sp"
         android:textStyle="bold"
@@ -191,13 +204,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.024"
-        app:srcCompat="@drawable/minilogo" />
+        app:srcCompat="@drawable/minilogo"
+        android:contentDescription="@string/mini_logo_image" />
 
     <Spinner
         android:id="@+id/MDocSpinner"
         android:layout_width="245dp"
         android:layout_height="50dp"
-        android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.855"

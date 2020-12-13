@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -33,7 +34,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class DoctorsPanel extends AppCompatActivity {
-    private Spinner spinner;
+    private Spinner spinner, spinnerCity;
     //    private ImageView refresh, remove;
     private TextView doctorInfo;
     private NewDoctor doctor;
@@ -83,6 +84,7 @@ public class DoctorsPanel extends AppCompatActivity {
         refresh = findViewById(R.id.Button_DoctorPanelRefresh);
         spinner = findViewById(R.id.MDocSpinner);
         remove = findViewById(R.id.Button_DoctorPanelRemove);
+        spinnerCity = findViewById(R.id.MDocSpinnerChooseCity);
 
         //TODO, it will contain details about the selected doctor (etc appointments count)
         doctorInfo = findViewById(R.id.txt_DoctorPanelInfo);
@@ -100,8 +102,14 @@ public class DoctorsPanel extends AppCompatActivity {
         myContext = this;
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, new String[]{"Refresh DB"});
-
+        ArrayAdapter<String> adapterCities = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, new String[]{"בחר מרפאה", "קריית שמונה", "חיפה", "נתניה", "ירושלים", "דימונה", "אילת"});
+        spinnerCity.setAdapter(adapterCities);
         spinner.setAdapter(adapter);
+
+        //Adding gravity to spinners, for better display enhancement
+        spinnerCity.setGravity(Gravity.END);
+        spinner.setGravity(Gravity.END);
+
     }
 
     //Get the list of doctors from DB
@@ -153,6 +161,22 @@ public class DoctorsPanel extends AppCompatActivity {
         String localDocEmail = doctorEmail.getText().toString();
         String localDocPass = doctorPass.getText().toString();
         String localDocSpecs = doctorSpecs.getText().toString();
+        String localDocCity = spinnerCity.getSelectedItem().toString();
+
+        //Make sure all the details about the doctor have been entered
+        if(localDocCity.contains("מרפאה")
+                || localDocID.isEmpty()
+                || localDocFN.isEmpty()
+                || localDocLN.isEmpty()
+                || localDocEmail.isEmpty()
+                || localDocPass.isEmpty()
+                || localDocSpecs.isEmpty()) {
+            new AlertDialog.Builder(this)
+                    .setTitle("שגיאה")
+                    .setMessage("חסרים פרטים אודות הרופא, השלם ונסה שנית").show();
+            return;
+        }
+
         NewDoctor doctor;
 
 
@@ -160,7 +184,7 @@ public class DoctorsPanel extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("Doctors");
 
-        doctor = new NewDoctor("", localDocID, localDocFN, localDocLN, localDocEmail, localDocPass, localDocSpecs);
+        doctor = new NewDoctor("", localDocID, localDocFN, localDocLN, localDocEmail, localDocPass, localDocSpecs, localDocCity);
         mAuth.createUserWithEmailAndPassword(localDocEmail, localDocPass).
                 addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
