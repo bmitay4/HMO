@@ -6,6 +6,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.hmo.Login_Screens.MainActivity;
 import com.example.hmo.Panels_Screens.ClientsPanel;
 import com.example.hmo.Panels_Screens.DoctorsPanel;
 import com.example.hmo.R;
@@ -21,7 +22,11 @@ public class Management extends AppCompatActivity {
         setValues();
         Doctors_Panel.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), DoctorsPanel.class)));
         Clients_Panel.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), ClientsPanel.class)));
-        goBack.setOnClickListener(v->finish());
+        goBack.setOnClickListener(v->{
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        });
 //        Queues_Panel.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), RegistrationDoctors.class)));
 //        Messages_Panel.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), RegistrationDoctors.class)));
 //        Drugs_Panel.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), RegistrationDoctors.class)));

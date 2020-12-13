@@ -1,5 +1,7 @@
 package com.example.hmo.Login_Screens;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.hmo.General_Objects.Admin;
 import com.example.hmo.General_Objects.NewDoctor;
 import com.example.hmo.General_Objects.NewMember;
 import com.example.hmo.Management.Management;
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private NewMember member;
     private NewDoctor doctor;
     private int userType = -1;
+    private Context myContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
         forgotPass = findViewById(R.id.forgetPassButton);
         userID = findViewById(R.id.textBoxID);
         userPassword = findViewById(R.id.textBoxPass);
+
+        //Holds the context during operations in front of the DB
+        myContext = this;
     }
 
     private void login(){
@@ -63,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         refdb = fr.getReference();
         DatabaseReference ref_user = refdb.child("Users");
         DatabaseReference ref_doc = refdb.child("Doctors");
+        DatabaseReference admin_reference = refdb.child("Admins");
 
         ref_user.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -104,6 +112,35 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        //Check if the user is an admin, and if so transfer it to the management system
+        admin_reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Admin admin = (Admin) snapshot.child(localUserID).getValue(Admin.class);
+
+                if(admin != null && admin.getAdminPassword().equals(localUserPass)){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(myContext);
+                    builder.setTitle("התחברות מנהל");
+                    builder.setMessage("הנך נכנס לאזור רגיש המכיל מידע אישי, האם להמשיך?");
+                    builder.setPositiveButton("כן", (dialog, which) -> {
+                        dialog.dismiss();
+                        Intent intent = new Intent(myContext, Management.class);
+                        startActivity(intent);
+                        finish();
+                    });
+
+                    builder.setNegativeButton("ביטול", (dialog, which) -> dialog.dismiss());
+
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MainActivity.this, "DB-User failed", Toast.LENGTH_SHORT).show();
             }
         });
 
