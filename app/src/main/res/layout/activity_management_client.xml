@@ -9,13 +9,44 @@
     android:layout_height="match_parent"
     tools:context=".Panels_Screens.ClientsPanel">
 
-    <Button
-        android:id="@+id/button_MClientToHome"
+    <TextView
+        android:id="@+id/txt_MClientTitle3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#87BADD"
         android:gravity="right|center_vertical"
-        android:text="למסך הבית"
+        android:text="פרטי הלקוח"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.553" />
+
+    <SearchView
+        android:id="@+id/Search_ClientPanel"
+        android:layout_width="360dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="8dp"
+        android:iconifiedByDefault="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.226"
+        app:showAsAction="collapseActionView|always" />
+
+    <Button
+        android:id="@+id/button_MClientToHome"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#87BADD"
+        android:gravity="center_vertical"
+        android:text="חזור למסך הבית"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,20 +56,80 @@
 
     <ListView
         android:id="@+id/MClientList"
-        android:layout_width="291dp"
-        android:layout_height="282dp"
+        android:layout_width="240dp"
+        android:layout_height="155dp"
         android:layout_margin="10dp"
         android:gravity="right|center_vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintHorizontal_bias="0.906"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.236" />
+        app:layout_constraintVertical_bias="0.383" />
+
+    <TextView
+        android:id="@+id/txt_MClientFullInfo"
+        android:layout_width="370dp"
+        android:layout_height="125dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.39"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.688" />
+
+    <Button
+        android:id="@+id/Button_ClientPanelEdit"
+        android:layout_width="109dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#87BADD"
+        android:text="ערוך"
+        android:textSize="16sp"
+        app:icon="@drawable/edit"
+        app:iconPadding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.086"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.48" />
+
+    <Button
+        android:id="@+id/Button_ClientPanelRemove"
+        android:layout_width="109dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#87BADD"
+        android:text="מחק "
+        android:textSize="16sp"
+        app:icon="@drawable/deleteicon"
+        app:iconPadding="11dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.086"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.400" />
+
+    <Button
+        android:id="@+id/Button_ClientPanelRefresh"
+        android:layout_width="109dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#87BADD"
+        android:text="רענן"
+        android:textSize="16sp"
+        app:icon="@drawable/refresh"
+        app:iconPadding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.086"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.32" />
 
     <TextView
         android:id="@+id/txt_MClientTitle"
-        android:layout_width="284dp"
+        android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:gravity="right|center_vertical"
         android:text="ניהול לקוחות המרפאה"
@@ -46,10 +137,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.839"
+        app:layout_constraintHorizontal_bias="0.828"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.054" />
+        app:layout_constraintVertical_bias="0.060" />
 
     <ImageView
         android:id="@+id/Img_MClientLogo"
@@ -62,17 +153,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.024"
         app:srcCompat="@drawable/minilogo" />
-
-    <TextView
-        android:id="@+id/txt_MClientFullInfo"
-        android:layout_width="305dp"
-        android:layout_height="162dp"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.716"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.738" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
