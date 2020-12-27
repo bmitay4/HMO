@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/msg_achive"
-        android:title="Archive"
+        android:title="ארכיון"
         app:showAsAction="never"
         />
     <item android:id="@+id/msg_new"

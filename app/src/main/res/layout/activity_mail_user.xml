@@ -6,6 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        android:id="@+id/msg_toolbar_user"
+        layout="@layout/toolbar"
+        />
+
     <ListView
         android:id="@+id/userMails"
         android:layout_width="408dp"
@@ -52,17 +57,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userMails"
         app:layout_constraintVertical_bias="0.8" />
-
-    <SearchView
-        android:id="@+id/User_Msg_Search"
-        android:layout_width="348dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/userMails"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.75" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

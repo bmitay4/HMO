@@ -3,17 +3,29 @@ package com.example.hmo.Message_Users;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 
 import com.example.hmo.General_Objects.Message;
+import com.example.hmo.General_Objects.NewDoctor;
 import com.example.hmo.General_Objects.NewMember;
+import com.example.hmo.Message_Users.MailUserActivity;
+import com.example.hmo.Message_Users.SendMassageActivity;
 import com.example.hmo.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,6 +50,8 @@ public class MailUserActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mail_user);
+        Toolbar tool = findViewById(R.id.msg_toolbar_user);
+        setSupportActionBar(tool);
 
         setup();
         new_msg.setOnClickListener(v-> user_new_msg());
@@ -75,7 +89,29 @@ public class MailUserActivity extends Activity {
         }else{
             getArchiveMessage();
         }
+    }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.archive_msg_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.msg_achive:
+                Toast.makeText(this, "ארכיון הודעות", Toast.LENGTH_SHORT).show();
+                getArchiveMessage();
+                isArchive = true;
+                return true;
+            case R.id.msg_new:
+                Toast.makeText(this, "תיבת הודעות", Toast.LENGTH_SHORT).show();
+                getMessage();
+                isArchive = false;
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void set_button() {
@@ -104,7 +140,7 @@ public class MailUserActivity extends Activity {
         back_home = findViewById(R.id.Mail_User_Back);
         fdb = FirebaseDatabase.getInstance();
         refdb = fdb.getReference();
-        user_msg_search = findViewById(R.id.User_Msg_Search);
+
     }
 
 

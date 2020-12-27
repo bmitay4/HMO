@@ -74,12 +74,12 @@ public class MailDocActicity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.msg_achive:
-                Toast.makeText(this, "ערכיון הודעות", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "ארכיון הודעות", Toast.LENGTH_SHORT).show();
                 getArchiveMessage();
                 isArchive = true;
                 return true;
             case R.id.msg_new:
-                Toast.makeText(this, "ערכיון הודעות", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "תיבת הודעות", Toast.LENGTH_SHORT).show();
                 getMessage();
                 isArchive = false;
                 return true;
