@@ -55,6 +55,7 @@ public class ConfirmAppointment extends AppCompatActivity {
         userName.setText(user.getUserFirstName()+" "+user.getUserLastName()+" כמעט סיימנו,");
         appointmentInfo.setText(apt.toString(user));
     }
+
     private void ConfirmBooking() {
         // Changing appointments settings
         apt.setAvailable(false);
@@ -82,5 +83,6 @@ public class ConfirmAppointment extends AppCompatActivity {
 
     private void FaildSetValue(@NonNull Exception e) {
         Toast.makeText(getApplicationContext(), "Somthing went wrong", Toast.LENGTH_LONG).show();
+        e.printStackTrace();
     }
 }

@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        android:id="@+id/msg_toolbar"
+        layout="@layout/toolbar" />
+
     <ListView
         android:id="@+id/allMsgs"
-        android:layout_width="418dp"
-        android:layout_height="554dp"
+        android:layout_width="413dp"
+        android:layout_height="539dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.571"
@@ -21,40 +24,27 @@
         android:id="@+id/Doc_Mail_newMassage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="34dp"
         android:layout_marginBottom="32dp"
         android:text="הודעה חדשה"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/DocMsg_New_Or_Archive"
+        app:layout_constraintStart_toEndOf="@+id/Doc_Mail_Back"
         app:layout_constraintTop_toBottomOf="@+id/allMsgs" />
-
-    <Button
-        android:id="@+id/DocMsg_New_Or_Archive"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
-        android:text="הודעות ישנות"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/allMsgs"
-        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/Doc_Mail_Back"
         android:layout_width="104dp"
         android:layout_height="47dp"
-        android:layout_marginStart="42dp"
         android:layout_marginTop="28dp"
-        android:layout_marginEnd="24dp"
         android:layout_marginBottom="32dp"
         android:text="חזרה"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/DocMsg_New_Or_Archive"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.257"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/allMsgs" />
+        app:layout_constraintTop_toBottomOf="@+id/allMsgs"
+        app:layout_constraintVertical_bias="0.473" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
