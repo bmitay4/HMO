@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/msg_toolbar_user"
-        layout="@layout/toolbar"
+        layout="@layout/toolbar_user"
         />
 
     <ListView
@@ -26,36 +26,27 @@
         android:id="@+id/Mail_User_newMassage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#87BADD"
         android:text="הודעה חדשה"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.945"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.601"
+        app:layout_constraintStart_toEndOf="@+id/Mail_User_Back"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.975" />
+        app:layout_constraintVertical_bias="0.957" />
 
     <Button
         android:id="@+id/Mail_User_Back"
         android:layout_width="117dp"
         android:layout_height="49dp"
         android:layout_marginTop="68dp"
+        android:backgroundTint="#87BADD"
         android:text="חזרה"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintHorizontal_bias="0.207"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.973" />
-
-    <Button
-        android:id="@+id/Msg_New_Or_Archive"
-        android:layout_width="127dp"
-        android:layout_height="48dp"
-        android:text="הודעות ישנות"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userMails"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintVertical_bias="0.952" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -39,7 +39,6 @@ public class BookAppointment extends AppCompatActivity {
     private ArrayList<NewDoctor> docList;
     private String date, docid;
     private Button confirmButton, goBackButton;
-    private SearchView doc_search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,20 +83,6 @@ public class BookAppointment extends AppCompatActivity {
         });
 
 
-        //Search doctor
-        doc_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                BookAppointment.this.arrdoc.getFilter().filter(s);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                BookAppointment.this.arrdoc.getFilter().filter(s);
-                return true;
-            }
-        });
 
         // pick date
         cal.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -176,12 +161,12 @@ public class BookAppointment extends AppCompatActivity {
         refdb = fdb.getReference();
         cal = findViewById(R.id.pickdate);
         doclist = findViewById(R.id.doclist);
-        doclist.setSelector(R.color.teal_200);
+        doclist.setSelector(R.color.HMO_blue);
         aptlist = findViewById(R.id.aptlist);
-        aptlist.setSelector(R.color.teal_200);
+        aptlist.setSelector(R.color.HMO_blue);
         confirmButton = findViewById(R.id.Button_AppointmentConfirm);
         goBackButton = findViewById(R.id.Button_AppointmentGoHome);
-        doc_search = findViewById(R.id.Doc_Search);
+
     }
 
     private void confirmQueue() {

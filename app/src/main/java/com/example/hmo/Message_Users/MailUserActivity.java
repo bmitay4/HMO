@@ -3,7 +3,6 @@ package com.example.hmo.Message_Users;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,12 +19,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-
 import com.example.hmo.General_Objects.Message;
-import com.example.hmo.General_Objects.NewDoctor;
 import com.example.hmo.General_Objects.NewMember;
-import com.example.hmo.Message_Users.MailUserActivity;
-import com.example.hmo.Message_Users.SendMassageActivity;
 import com.example.hmo.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MailUserActivity extends Activity {
+public class MailUserActivity extends AppCompatActivity {
 
     private ListView simpleList;
     private ArrayAdapter<String> arrayAdapter;
@@ -43,33 +38,20 @@ public class MailUserActivity extends Activity {
     private NewMember member;
     private FirebaseDatabase fdb;
     private DatabaseReference refdb;
-    private Button new_msg, archive_msg, back_home;
+    private Button new_msg, back_home;
     private boolean isArchive = false;
-    private SearchView user_msg_search;
+    private TextView toolbar_txt;
+    private Toolbar toolbar;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mail_user);
-        Toolbar tool = findViewById(R.id.msg_toolbar_user);
-        setSupportActionBar(tool);
+
 
         setup();
         new_msg.setOnClickListener(v-> user_new_msg());
         back_home.setOnClickListener(v -> finish());
-        user_msg_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                MailUserActivity.this.arrayAdapter.getFilter().filter(s);
-                return false;
-            }
 
-            @Override
-            public boolean onQueryTextChange(String s) {
-                MailUserActivity.this.arrayAdapter.getFilter().filter(s);
-                return false;
-            }
-        });
-        archive_msg.setOnClickListener(v -> set_button());
         simpleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -91,6 +73,7 @@ public class MailUserActivity extends Activity {
         }
     }
 
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.archive_msg_menu, menu);
@@ -114,17 +97,6 @@ public class MailUserActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void set_button() {
-        if (!isArchive) {
-            isArchive = true;
-            archive_msg.setText("הודעות חדשות");
-            getArchiveMessage();
-        } else {
-            isArchive = false;
-            archive_msg.setText("הודעות ישנות");
-            getMessage();
-        }
-    }
 
     private void user_new_msg() {
         Intent i = new Intent(MailUserActivity.this, SendMassageActivity.class);
@@ -136,17 +108,19 @@ public class MailUserActivity extends Activity {
         member = (NewMember) getIntent().getSerializableExtra("member");
         simpleList = (ListView) findViewById(R.id.userMails);
         new_msg = findViewById(R.id.Mail_User_newMassage);
-        archive_msg = findViewById(R.id.Msg_New_Or_Archive);
         back_home = findViewById(R.id.Mail_User_Back);
         fdb = FirebaseDatabase.getInstance();
         refdb = fdb.getReference();
 
+        toolbar = findViewById(R.id.msg_toolbar_user);
+        toolbar_txt = findViewById(R.id.msg_toolbar_user_title);
+        setSupportActionBar(toolbar);
     }
 
 
     private void getMessage() {
+        toolbar_txt.setText("הודעות חדשות");
 
-        msg_list = new ArrayList<Message>();
         refdb.child("Message").child(member.getUserID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -180,7 +154,7 @@ public class MailUserActivity extends Activity {
 
     private void getArchiveMessage() {
 
-
+        toolbar_txt.setText("הודעות ישנות");
         refdb.child("MessageArchive").child(member.getUserID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

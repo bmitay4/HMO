@@ -116,18 +116,6 @@ public class MailDocActicity extends AppCompatActivity {
         startActivity(i);
     }
 
-//    private void set_button() {
-//        if (!isArchive) {
-//            isArchive = true;
-//            archive_msg.setText("הודעות חדשות");
-//            getArchiveMessage();
-//        } else {
-//            isArchive = false;
-//            archive_msg.setText("הודעות ישנות");
-//            getMessage();
-//        }
-//    }
-
     private void getArchiveMessage() {
         toolbar_txt.setText("הודעות ישנות");
 

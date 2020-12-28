@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/msg_achive"
-        android:title="ארכיון"
+        android:title="הודעות ישנות"
         app:showAsAction="never"
         />
     <item android:id="@+id/msg_new"
-        android:title="New"
+        android:title="הודעות חדשות"
         app:showAsAction="never"
         />
 </menu>

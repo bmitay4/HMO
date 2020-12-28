@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/HMO_blue"
     android:elevation="4dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -20,10 +19,11 @@
         app:layout_constraintVertical_bias="0.035"
         app:srcCompat="@drawable/minilogo" />
     <TextView
-        android:id="@+id/msg_toolbar_title"
+        android:id="@+id/msg_toolbar_user_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="Sample"
         android:textSize="24sp" />
+
 </androidx.appcompat.widget.Toolbar>
