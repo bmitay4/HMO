@@ -9,7 +9,7 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
     <ImageView
-        android:id="@+id/Img_MiniLogo"
+        android:id="@+id/Img_MiniLogo_toolbar"
         android:layout_width="56dp"
         android:layout_height="55dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hmo.General_Objects.Message;
 import com.example.hmo.General_Objects.NewMember;
+import com.example.hmo.General_Objects.UserLoginDialog;
 import com.example.hmo.Message_Users.MailUserActivity;
 import com.example.hmo.R;
 import com.example.hmo.Message_Users.SendMassageActivity;
@@ -40,6 +41,7 @@ public class ClientLogin extends AppCompatActivity {
 
         //Get the widgets from the layout and link them to the variables
         setValues();
+        openDialog();
 
         // Check my msg's
         msg = findViewById(R.id.button_notifications);
@@ -129,5 +131,10 @@ public class ClientLogin extends AppCompatActivity {
 
         //Holds the context during operations in front of the DB
         myContext = this;
+    }
+
+    public void openDialog(){
+        UserLoginDialog d = new UserLoginDialog();
+        d.show(getSupportFragmentManager(),"התראת חיסון");
     }
 }

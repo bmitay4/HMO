@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), ClientLogin.class);
                 intent.putExtra("member", member);
                 startActivity(intent);
-                finish();
+               // finish();
             }
 
             @Override
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), DoctorLogin.class);
                 intent.putExtra("doctor", doctor);
                 startActivity(intent);
-                finish();
+              //  finish();
             }
 
             @Override
