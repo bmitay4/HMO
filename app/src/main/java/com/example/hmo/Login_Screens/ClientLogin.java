@@ -33,6 +33,7 @@ public class ClientLogin extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference reference;
     private Context myContext;
+    private int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,11 +58,11 @@ public class ClientLogin extends AppCompatActivity {
         reference.child(member.getUserID()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot member_id) {
-                int count = 0;
+//                int count = 0;
                 for (DataSnapshot dates : member_id.getChildren()) {
                     for (DataSnapshot doctor_id : dates.getChildren()) {
                         for (DataSnapshot time : doctor_id.getChildren()) {
-                            if (time.getValue(Message.class) != null)
+                            if (time.getValue(Message.class) != null && time.getValue(Message.class).getToID().equals(member.getUserID()))
                                 count++;
                         }
                     }
@@ -69,6 +70,7 @@ public class ClientLogin extends AppCompatActivity {
                 if (count > 0)
                     Toast.makeText(myContext, "יש לך " + count + " הודעות חדשות שטרם נקראו", Toast.LENGTH_LONG)
                             .show();
+                count = 0;
             }
 
             @Override
