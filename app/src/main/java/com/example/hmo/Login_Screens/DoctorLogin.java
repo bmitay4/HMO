@@ -63,8 +63,9 @@ public class DoctorLogin extends AppCompatActivity {
                     }
                 }
                 if (count > 0)
-                    Toast.makeText(myContext, "יש לך " + count + " הודעות חדשות שטרם נקראו", Toast.LENGTH_LONG)
-                            .show();
+                    Toast.makeText(myContext, "יש לך " + count + " הודעות חדשות שטרם נקראו", Toast.LENGTH_LONG);
+//                            .show();
+                //Due to technical issues, the message showing the amount of new messages has been hidden from the user
                 count = 0;
             }
 
